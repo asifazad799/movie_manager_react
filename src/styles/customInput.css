@@ -10,6 +10,7 @@
 
 .customInput input {
   padding: 9.5px 12px;
+  font-size: 13px;
 }
 
 .custominput input[type="text"] {

@@ -47,7 +47,6 @@
   /* margin: 0 auto; */
   /* padding: 2rem; */
   text-align: center;
-
 }
 
 .app {
@@ -87,4 +86,13 @@
   font-weight: 600;
   letter-spacing: 1px;
   color: white;
+}
+
+.errorTxt {
+  color: #d32f2f;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0px;
+  margin-bottom: 9px;
+  text-transform: capitalize;
 }

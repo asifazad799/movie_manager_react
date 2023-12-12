@@ -1,26 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import lock from "../assets/icons/lock.webp";
 import { useForm } from "../hooks/useForms";
 import { logInValidationSchema } from "../utils/formValidationSchema";
+import useLogin from "../hooks/useLogin";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function LoginForm({ customHandleSubmit }) {
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleSubmit,
-    isSubmitting,
-    setFieldValue,
-  } = useForm(
+  const [apiError, setApiError] = useState("");
+  const { login, laoding } = useLogin({ setApiError });
+
+  const { values, errors, touched, handleChange, handleSubmit } = useForm(
     {
       userId: "",
       password: "",
     },
-    // test
     (values) => {
-      customHandleSubmit(values);
+      values.password = Number(values.password);
+      login(values);
     },
     logInValidationSchema
   );
@@ -46,7 +43,7 @@ function LoginForm({ customHandleSubmit }) {
         />
         <CustomInput
           fullWidth
-        //   variant="outlined"
+          //   variant="outlined"
           id="password"
           //   label="User Id"
           name="password"
@@ -58,9 +55,13 @@ function LoginForm({ customHandleSubmit }) {
           onChange={handleChange}
           title={"Password"}
         />
-        <button type="submit" className="loginBtn">
-          <p className="defaultFontFam confirmTxt">Confirm</p>
-        </button>
+        <div style={{ width: "100%" }}>
+          {apiError && <p className="defaultFontFam errorTxt">{apiError}</p>}
+          {laoding && <CircularProgress color="success" />}
+          <button type="submit" className="loginBtn">
+            <p className="defaultFontFam confirmTxt">Confirm</p>
+          </button>
+        </div>
       </form>
     </div>
   );
