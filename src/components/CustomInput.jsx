@@ -126,7 +126,11 @@ function CustomInput(props) {
         }}
         style={{
           "& legend": { display: "none !important" },
-          "& fieldset": { top: 0 },
+          "& fieldset": {
+            top: 0,
+            errorBorder: "0px",
+            customStyle: { borderColor: "green" },
+          },
           marginTop: "8px",
           marginBottom: "18px !important",
         }}
