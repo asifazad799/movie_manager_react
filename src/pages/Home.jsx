@@ -35,13 +35,24 @@ function Home() {
     <DefaultParentComp>
       <div className="homeContainer">
         <p className="defaultFont">Your Movies</p>
-        <CustomInput
-          fullWidth
-          variant="outlined"
-          id="userId"
-          label="Search Movie"
-          title={"Search Movie"}
-        />
+        {/* <div className="searchSec"> */}
+        <Grid container spacing={1} className="searchSec">
+          <Grid xs={12} sm={9} md={10} item>
+            <CustomInput
+              fullWidth
+              variant="outlined"
+              id="userId"
+              label="Search Movie"
+              title={"Search Movie"}
+            />
+          </Grid>
+          <Grid xs={12} sm={3} md={2} item>
+            <button style={{ height: "39px" }} className="loginBtn">
+              <p className="defaultFontFam confirmTxt mr-0">Add New Movie</p>
+            </button>
+          </Grid>
+        </Grid>
+        {/* </div> */}
         <div className="movieList">
           <Grid container spacing={1}>
             {data?.map((movie) => {

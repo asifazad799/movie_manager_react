@@ -117,3 +117,6 @@
   position: relative;
   overflow: hidden;
 }
+.mr-0 {
+  margin: 0px;
+}
