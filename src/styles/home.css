@@ -1,0 +1,8 @@
+.homeContainer {
+  height: 100%;
+  width: 100%;
+  color: white;
+  background-color: transparent;
+  padding: 20px;
+  max-width: 900px;
+}

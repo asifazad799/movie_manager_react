@@ -48,7 +48,7 @@ function LoginForm({ customHandleSubmit }) {
           //   label="User Id"
           name="password"
           autoComplete="password"
-          autoFocus
+        //   autoFocus
           error={touched.password && Boolean(errors.password)}
           helperText={touched.password && errors.password}
           value={values.password}

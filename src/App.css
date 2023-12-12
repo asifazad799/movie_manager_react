@@ -75,7 +75,7 @@
   font-size: 22px;
   font-style: normal;
   font-weight: 600;
-  line-height: 19px;
+  line-height: 24px;
   letter-spacing: 0.44px;
   color: white;
   margin: 0px;
@@ -95,4 +95,25 @@
   margin: 0px;
   margin-bottom: 9px;
   text-transform: capitalize;
+}
+
+.polygon1 {
+  position: absolute;
+  top: -106px;
+  left: -290px;
+}
+
+.polygon2 {
+  position: absolute;
+  bottom: -65px;
+  right: -84px;
+}
+
+.login-page {
+  height: 100%;
+  width: 100%;
+  background-color: #03011b;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
