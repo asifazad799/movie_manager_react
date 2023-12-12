@@ -20,7 +20,48 @@
   overflow: hidden;
   background-position: center center;
   background-size: cover;
+  position: relative;
   /* box-shadow: inset 15px -185px 261px -44px #000000; */
   /* box-shadow: inset 15px -185px 261px -44px #000000; */
+}
 
+.hoverLayer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgb(0 0 0 / 58%);
+}
+
+.deleteIcon {
+  color: red;
+  margin-left: auto;
+  right: 10px;
+  position: absolute;
+  top: 10px;
+  cursor: pointer;
+  height: 30px !important;
+  width: 30px !important;
+}
+
+.watchToggleSection {
+  display: flex;
+  position: absolute;
+  top: 44%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkBoxIcon {
+  color: white;
+  height: 50px !important;
+  width: 50px !important;
+}
+
+.notWatched {
+  /* color: yellow; */
+}
+
+.watched {
+  color: green;
 }
