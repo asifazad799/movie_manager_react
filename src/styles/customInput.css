@@ -1,0 +1,17 @@
+.customInput {
+  border: 1.4px solid #440180;
+  color: white !important;
+  outline: none;
+}
+
+.customInput input:focus {
+  outline: none;
+}
+
+.customInput input {
+  padding: 9.5px 12px;
+}
+
+.custominput input[type="text"] {
+  font-size: 3px !important;
+}

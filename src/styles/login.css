@@ -1,0 +1,81 @@
+.polygon1 {
+  position: absolute;
+  top: -106px;
+  left: -290px;
+}
+
+.polygon2 {
+  position: absolute;
+  bottom: -65px;
+  right: -84px;
+}
+
+.login-page {
+  height: 100%;
+  width: 100%;
+  background-color: #03011b;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-form {
+  width: 350px;
+  /* height: 400px; */
+  border-radius: 4px;
+  /* background-color: red; */
+  background: rgb(255 255 255 / 6%);
+  /* border-radius: 16px; */
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+  backdrop-filter: blur(26.3px);
+  -webkit-backdrop-filter: blur(16.3px);
+  border: none;
+  flex-direction: column;
+  /* border: 1px solid rgba(255, 255, 255, 0.17); */
+  padding: 25px;
+  padding-bottom: 41px;
+}
+
+.cercle {
+  background-color: #580258;
+  position: absolute;
+  top: 51%;
+  left: 49%;
+  border-radius: 50%;
+  height: 147px;
+  width: 147px;
+  filter: blur(93px);
+}
+
+.form {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+
+}
+
+.loginBtn {
+  background: linear-gradient(
+    92deg,
+    rgba(75, 65, 194, 0.78) -7.73%,
+    rgba(185, 82, 181, 0.37) 119.46%
+  );
+  border-radius: 4px;
+  border: none;
+  width: 100%;
+}
+
+.loginBtn:hover {
+  scale: 1.02;
+  transition: ease-in;
+  transition-duration: 0.5s;
+  cursor: pointer;
+}
+
+.lockIcon{
+    height: 50px;
+    width: 50px;
+}
+
