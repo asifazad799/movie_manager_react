@@ -9,15 +9,22 @@ import AddMovieButton from "../components/AddMovieButton";
 import AddMovieModal from "../components/AddMovieModal";
 import { movieData } from "../utils/sampleStaticData";
 import useGetUserMovieList from "../hooks/useGetUserMovieList";
+import useLogout from "../hooks/useLogout";
 
 function Home() {
   const [newMovie, setNewMoview] = useState(false);
   const { callUserMovieList, movieList } = useGetUserMovieList();
+  const { logOut } = useLogout();
 
   return (
     <DefaultParentComp>
       <div className="homeContainer">
         <p className="defaultFont">Your Movies</p>
+        <div className="logOutWrapper">
+          <div className="logout">
+            <AddMovieButton title="Log Out" hanleClick={logOut} />
+          </div>
+        </div>
         <Grid container spacing={1} className="searchSec">
           <Grid xs={12} sm={9} md={10} item>
             <CustomInput
