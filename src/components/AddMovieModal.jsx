@@ -13,9 +13,10 @@ import { Checkbox } from "@mui/material";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUncheckedRounded";
 import useAddMovie from "../hooks/useAddMovie";
+import DebouncedInput from "./DebouncedInput";
 
 function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
-  const { getAllMovies, allMovie } = useGetAllMovie({ neList });
+  const { getAllMovies, allMovie, setSearch } = useGetAllMovie({ neList });
   const { addMovies } = useAddMovie({ handleClose, handleSubmit });
   const [selected, setSelectedList] = useState({});
 
@@ -23,6 +24,10 @@ function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
     setSelectedList((prev) => {
       return { ...prev, [index]: { ...val, selected: true } };
     });
+  };
+
+  const handleSearch = (value) => {
+    setSearch(() => value);
   };
 
   return (
@@ -52,13 +57,14 @@ function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
       <div className="homeContainer modalContainer">
         <Grid container spacing={1} className="searchSec">
           <Grid xs={12} sm={9} md={10} item>
-            <CustomInput
+            {/* <CustomInput
               fullWidth
               variant="outlined"
               id="userId"
               label="Search"
               title={"Search New Movie"}
-            />
+            /> */}
+            <DebouncedInput handleChange={handleSearch} />
           </Grid>
           <Grid xs={12} sm={3} md={2} item>
             <AddMovieButton

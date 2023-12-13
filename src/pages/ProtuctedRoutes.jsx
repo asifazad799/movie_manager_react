@@ -11,6 +11,15 @@ function ProtuctedRoutes() {
     if (!loggeduser?.token) {
       navigate("/");
     }
+
+    const expiry = loggeduser.expiry;
+    const currentDate = new Date();
+    const expires_at_new = new Date(expiry);
+
+    if (currentDate > expires_at_new) {
+      localStorage.removeItem("loggedInUser");
+      return navigate("/");
+    }
   }, []);
 
   return <Outlet />;

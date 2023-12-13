@@ -19,6 +19,24 @@ const API = axios.create({
 
 API.interceptors.request.use((req) => setHeaders(req));
 
+API.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      sessionStorage.setItem("redirect", window.location.href);
+
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location = "/";
+F
+    }
+
+    if (error.response) return Promise.reject(error);
+  }
+);
+
 export const loginAPI = (body) => {
   return API.post("/auth/log-in", { ...body });
 };
