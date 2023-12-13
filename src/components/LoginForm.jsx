@@ -6,13 +6,12 @@ import { logInValidationSchema } from "../utils/formValidationSchema";
 import useLogin from "../hooks/useLogin";
 import CircularProgress from "@mui/material/CircularProgress";
 import useSignUp from "../hooks/useSignUp";
-import Alert from '@mui/material/Alert';
-
+import Alert from "@mui/material/Alert";
 
 function LoginForm({ customHandleSubmit }) {
   const [apiError, setApiError] = useState("");
   const { login, laoding } = useLogin({ setApiError });
-  const { signUpCall } = useSignUp({ setApiError });
+  const { signUpCall, res } = useSignUp({ setApiError });
   const [signUp, setSignUp] = useState(false);
 
   const { values, errors, touched, handleChange, handleSubmit } = useForm(
@@ -36,7 +35,14 @@ function LoginForm({ customHandleSubmit }) {
     <div className="login-form d-flex">
       <p className="defaultFont">{signUp ? "Sign Up" : "Log In"}</p>
       <form className="form" onSubmit={handleSubmit}>
-        <img src={lock} className="lockIcon" />
+        {res == 200 ? (
+          <Alert style={{ width: "100%" }} severity="success">
+            Your user created
+          </Alert>
+        ) : (
+          <img src={lock} className="lockIcon" />
+        )}
+
         <CustomInput
           fullWidth
           variant="outlined"
