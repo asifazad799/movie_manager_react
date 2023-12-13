@@ -8,10 +8,11 @@ import { Grid } from "@mui/material";
 import AddMovieButton from "../components/AddMovieButton";
 import AddMovieModal from "../components/AddMovieModal";
 import { movieData } from "../utils/sampleStaticData";
+import useGetUserMovieList from "../hooks/useGetUserMovieList";
 
 function Home() {
-
   const [newMovie, setNewMoview] = useState(false);
+  const { callUserMovieList, movieList } = useGetUserMovieList();
 
   return (
     <DefaultParentComp>
@@ -38,7 +39,7 @@ function Home() {
         {/* </div> */}
         <div className="movieList">
           <Grid container spacing={1}>
-            {movieData?.map((movie) => {
+            {movieList?.map((movie) => {
               return (
                 <Grid key={movie?.title} xs={12} sm={6} md={4} item>
                   <MovieCards {...movie} />

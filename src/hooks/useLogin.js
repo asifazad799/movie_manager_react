@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { loginAPI } from "../api/auth";
+import { loginAPI } from "../api";
 import ls from "localstorage-slim";
 import { useAppStore } from "../store/globalStore";
 import { useNavigate } from "react-router-dom";
