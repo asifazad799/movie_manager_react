@@ -18,12 +18,17 @@ function useLogin({ setApiError }) {
 
       ls.set(
         "loggedInUser",
-        { token: res?.data?.token, userId: res?.data?.user?.userId },
+        {
+          token: res?.data?.token,
+          user: res?.data?.user,
+          expiry: res?.data?.expiry,
+        },
         { secret: 50 }
       );
       setLoggedInUser({
         token: res?.data?.token,
-        userId: res?.data?.user?.userId,
+        user: res?.data?.user,
+        expiry: res?.data?.expiry,
       });
       navigate("/home");
       setLoading(false);

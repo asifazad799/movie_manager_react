@@ -8,7 +8,7 @@ function ProtuctedRoutes() {
 
   useEffect(() => {
     console.log(loggeduser, "agagj");
-    if (!loggeduser) {
+    if (!loggeduser?.token) {
       navigate("/");
     }
   }, []);

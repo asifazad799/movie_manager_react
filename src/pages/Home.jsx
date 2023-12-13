@@ -17,7 +17,6 @@ function Home() {
     <DefaultParentComp>
       <div className="homeContainer">
         <p className="defaultFont">Your Movies</p>
-        {/* <div className="searchSec"> */}
         <Grid container spacing={1} className="searchSec">
           <Grid xs={12} sm={9} md={10} item>
             <CustomInput
