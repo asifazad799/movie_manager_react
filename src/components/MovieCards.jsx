@@ -4,7 +4,7 @@ import { Checkbox } from "@mui/material";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUncheckedRounded";
 
-function MovieCards({ title, backdrop, poster }) {
+function MovieCards({ title, backdrop, poster, customHandler, selected }) {
   const [hover, setHover] = useState(false);
 
   return (
@@ -18,22 +18,34 @@ function MovieCards({ title, backdrop, poster }) {
         setHover((pre) => !pre);
       }}
     >
-      {hover && (
-        <div className="hoverLayer">
-          <DeleteOutlineRoundedIcon className="deleteIcon" color="red" />
+      {hover ? (
+        customHandler ? (
+          customHandler
+        ) : (
+          <div className="hoverLayer">
+            <DeleteOutlineRoundedIcon className="deleteIcon" color="red" />
 
-          <div className="watchToggleSection">
-            <p className="defaultFontFam">Wtched</p>
-            <Checkbox
-              icon={
-                <RadioButtonUncheckedRoundedIcon className="checkBoxIcon notWatched" />
-              }
-              checkedIcon={
-                <CheckCircleOutlineRoundedIcon className="checkBoxIcon watched" />
-              }
-            />
+            <div className="watchToggleSection">
+              <p className="defaultFontFam">Wtched</p>
+              <Checkbox
+                icon={
+                  <RadioButtonUncheckedRoundedIcon className="checkBoxIcon notWatched" />
+                }
+                checkedIcon={
+                  <CheckCircleOutlineRoundedIcon className="checkBoxIcon watched" />
+                }
+              />
+            </div>
           </div>
-        </div>
+        )
+      ) : selected ? (
+        customHandler ? (
+          customHandler
+        ) : (
+          ""
+        )
+      ) : (
+        ""
       )}
       {/* <img src={backdrop} /> */}
       {/* {title} */}

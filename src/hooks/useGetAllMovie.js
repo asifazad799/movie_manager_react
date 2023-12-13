@@ -7,7 +7,7 @@ function useGetAllMovie({ neList }) {
   const getAllMovies = async () => {
     try {
       let res = await getAllMovie({ neList: neList.join(",") });
-      console.log(res?.data?.list, "res");
+    //   console.log(res?.data?.list, "res");
       setAllMovie(() => res?.data?.list);
     } catch (error) {}
   };

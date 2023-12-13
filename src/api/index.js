@@ -30,3 +30,7 @@ export const getUserMovieList = (param) => {
 export const getAllMovie = (param) => {
   return API.get("/movie/list", { params: param });
 };
+
+export const addMovie = (body) => {
+  return API.post("/movie/add", body);
+};

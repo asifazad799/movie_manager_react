@@ -51,6 +51,7 @@ function Home() {
       </div>
       {newMovie && (
         <AddMovieModal
+          handleSubmit={callUserMovieList}
           neList={movieList.map((val) => val?._id)}
           open={newMovie}
           handleClose={() => {
