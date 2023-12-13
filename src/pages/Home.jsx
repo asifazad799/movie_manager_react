@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DefaultParentComp from "../components/DefaultParentComp";
 import "../styles/movieCard.css";
 import "../styles/home.css";
@@ -10,11 +10,23 @@ import AddMovieModal from "../components/AddMovieModal";
 import { movieData } from "../utils/sampleStaticData";
 import useGetUserMovieList from "../hooks/useGetUserMovieList";
 import useLogout from "../hooks/useLogout";
+import useDeleteMovie from "../hooks/useDeleteMovie";
 
 function Home() {
   const [newMovie, setNewMoview] = useState(false);
   const { callUserMovieList, movieList } = useGetUserMovieList();
   const { logOut } = useLogout();
+  const [list, setList] = useState([]);
+  const handleDelete = (data) => {
+    console.log(data?.movieId, list, "algj");
+
+    setList((prev) => prev.filter((movie) => movie?._id !== data?.movieId));
+  };
+  const { deleteMovieList } = useDeleteMovie({ handleDelete });
+
+  useEffect(() => {
+    setList(() => movieList);
+  }, [movieList]);
 
   return (
     <DefaultParentComp>
@@ -46,10 +58,10 @@ function Home() {
         {/* </div> */}
         <div className="movieList">
           <Grid container spacing={1}>
-            {movieList?.map((movie) => {
+            {list?.map((movie) => {
               return (
                 <Grid key={movie?.title} xs={12} sm={6} md={4} item>
-                  <MovieCards {...movie} />
+                  <MovieCards handleDelete={deleteMovieList} {...movie} />
                 </Grid>
               );
             })}

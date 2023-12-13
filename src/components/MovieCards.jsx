@@ -4,7 +4,15 @@ import { Checkbox } from "@mui/material";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUncheckedRounded";
 
-function MovieCards({ title, backdrop, poster, customHandler, selected }) {
+function MovieCards({
+  title,
+  backdrop,
+  poster,
+  customHandler,
+  selected,
+  handleDelete,
+  _id,
+}) {
   const [hover, setHover] = useState(false);
 
   return (
@@ -23,7 +31,13 @@ function MovieCards({ title, backdrop, poster, customHandler, selected }) {
           customHandler
         ) : (
           <div className="hoverLayer">
-            <DeleteOutlineRoundedIcon className="deleteIcon" color="red" />
+            <DeleteOutlineRoundedIcon
+              className="deleteIcon"
+              onClick={() => {
+                handleDelete({ movieId: _id });
+              }}
+              color="red"
+            />
 
             <div className="watchToggleSection">
               <p className="defaultFontFam">Wtched</p>

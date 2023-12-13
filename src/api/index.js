@@ -57,3 +57,7 @@ export const getAllMovie = (param) => {
 export const addMovie = (body) => {
   return API.post("/movie/add", body);
 };
+
+export const deleteMovie = (param) => {
+  return API.delete("/movie/delete", { params: param });
+};
