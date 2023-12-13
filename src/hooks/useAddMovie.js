@@ -18,7 +18,7 @@ function useAddMovie({ handleClose, handleSubmit }) {
       let res = await addMovie(payload);
       handleClose();
       handleSubmit();
-      console.log(res);
+    //   console.log(res);
     } catch (error) {}
   };
 

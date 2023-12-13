@@ -5,10 +5,15 @@ import { useForm } from "../hooks/useForms";
 import { logInValidationSchema } from "../utils/formValidationSchema";
 import useLogin from "../hooks/useLogin";
 import CircularProgress from "@mui/material/CircularProgress";
+import useSignUp from "../hooks/useSignUp";
+import Alert from '@mui/material/Alert';
+
 
 function LoginForm({ customHandleSubmit }) {
   const [apiError, setApiError] = useState("");
   const { login, laoding } = useLogin({ setApiError });
+  const { signUpCall } = useSignUp({ setApiError });
+  const [signUp, setSignUp] = useState(false);
 
   const { values, errors, touched, handleChange, handleSubmit } = useForm(
     {
@@ -17,14 +22,19 @@ function LoginForm({ customHandleSubmit }) {
     },
     (values) => {
       values.password = Number(values.password);
-      login(values);
+      if (signUp) signUpCall(values);
+      else login(values);
     },
     logInValidationSchema
   );
 
+  const handleSwitch = () => {
+    setSignUp((prev) => !prev);
+  };
+
   return (
     <div className="login-form d-flex">
-      <p className="defaultFont">Log In</p>
+      <p className="defaultFont">{signUp ? "Sign Up" : "Log In"}</p>
       <form className="form" onSubmit={handleSubmit}>
         <img src={lock} className="lockIcon" />
         <CustomInput
@@ -48,13 +58,16 @@ function LoginForm({ customHandleSubmit }) {
           //   label="User Id"
           name="password"
           autoComplete="password"
-        //   autoFocus
+          //   autoFocus
           error={touched.password && Boolean(errors.password)}
           helperText={touched.password && errors.password}
           value={values.password}
           onChange={handleChange}
           title={"Password"}
         />
+        <p className="defaultFontFam text2" onClick={handleSwitch}>
+          {!signUp ? "Sign Up?" : "Log In?"}
+        </p>
         <div style={{ width: "100%" }}>
           {apiError && <p className="defaultFontFam errorTxt">{apiError}</p>}
           {laoding && <CircularProgress color="success" />}

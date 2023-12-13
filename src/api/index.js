@@ -31,7 +31,7 @@ API.interceptors.response.use(
       localStorage.clear();
       sessionStorage.clear();
       window.location = "/";
-F
+      F;
     }
 
     if (error.response) return Promise.reject(error);
@@ -40,6 +40,10 @@ F
 
 export const loginAPI = (body) => {
   return API.post("/auth/log-in", { ...body });
+};
+
+export const signAPI = (body) => {
+  return API.post("/auth/sign-up", { ...body });
 };
 
 export const getUserMovieList = (param) => {

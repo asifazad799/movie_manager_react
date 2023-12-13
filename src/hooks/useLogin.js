@@ -14,7 +14,7 @@ function useLogin({ setApiError }) {
     setApiError("");
     try {
       let res = await loginAPI(body);
-      console.log(res?.data, "lkanlbfj");
+    //   console.log(res?.data, "lkanlbfj");
 
       ls.set(
         "loggedInUser",
