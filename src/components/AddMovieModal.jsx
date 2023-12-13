@@ -7,8 +7,11 @@ import CustomInput from "./CustomInput";
 import AddMovieButton from "./AddMovieButton";
 import { movieData } from "../utils/sampleStaticData";
 import MovieCards from "./MovieCards";
+import useGetAllMovie from "../hooks/useGetAllMovie";
 
-function AddMovieModal({ handleClose, open }) {
+function AddMovieModal({ handleClose, open, neList }) {
+  const { getAllMovies, allMovie } = useGetAllMovie({ neList });
+
   return (
     <Dialog
       fullWidth={true}
@@ -53,15 +56,17 @@ function AddMovieModal({ handleClose, open }) {
           </Grid>
         </Grid>
         <div className="movieList">
-          <Grid container spacing={1}>
-            {movieData?.map((movie) => {
-              return (
-                <Grid key={movie?.title} xs={12} sm={6} md={4} item>
-                  <MovieCards {...movie} />
-                </Grid>
-              );
-            })}
-          </Grid>
+          {allMovie && (
+            <Grid container spacing={1}>
+              {allMovie?.map((movie) => {
+                return (
+                  <Grid key={movie?.title} xs={12} sm={6} md={4} item>
+                    <MovieCards {...movie} />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          )}
         </div>
       </div>
     </Dialog>

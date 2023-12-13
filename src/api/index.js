@@ -4,7 +4,7 @@ const baseUrl = "http://localhost:8080";
 
 function setHeaders(req) {
   const loggedUser = ls.get("loggedInUser", { secret: 50 });
-  console.log(loggedUser,'nkacnka');
+  console.log(loggedUser, "nkacnka");
   const Token = loggedUser?.state?.loggedInUser?.token;
 
   if (Token) {
@@ -20,9 +20,13 @@ const API = axios.create({
 API.interceptors.request.use((req) => setHeaders(req));
 
 export const loginAPI = (body) => {
-  return API.post(baseUrl + "/auth/log-in", { ...body });
+  return API.post("/auth/log-in", { ...body });
 };
 
 export const getUserMovieList = (param) => {
-  return API.get(baseUrl + "/movie//user-movie-list", { params: param });
+  return API.get("/movie/user-movie-list", { params: param });
+};
+
+export const getAllMovie = (param) => {
+  return API.get("/movie/list", { params: param });
 };

@@ -49,12 +49,15 @@ function Home() {
           </Grid>
         </div>
       </div>
-      <AddMovieModal
-        open={newMovie}
-        handleClose={() => {
-          setNewMoview(false);
-        }}
-      />
+      {newMovie && (
+        <AddMovieModal
+          neList={movieList.map((val) => val?._id)}
+          open={newMovie}
+          handleClose={() => {
+            setNewMoview(false);
+          }}
+        />
+      )}
     </DefaultParentComp>
   );
 }

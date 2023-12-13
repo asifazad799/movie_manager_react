@@ -14,7 +14,7 @@ function useGetUserMovieList() {
       res?.data?.list[0]?.movieList?.map((val, index) => {
         newList.push({ ...data[index], watched: val?.watched });
       });
-      console.log(newList, "njnjnj");
+    //   console.log(newList, "njnjnj");
       setMovieList(() => newList);
     } catch (error) {}
   };
