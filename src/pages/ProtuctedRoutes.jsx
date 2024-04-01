@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAppStore } from "../store/globalStore";
+
+import { useAppStore } from "../store";
 
 function ProtuctedRoutes() {
   const loggeduser = useAppStore((state) => state?.loggedInUser);

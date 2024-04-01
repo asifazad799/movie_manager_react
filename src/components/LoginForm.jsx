@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import CustomInput from "../components/CustomInput";
+
+import { useForm, useLogin, useSignUp } from "../hooks";
+
+import { logInValidationSchema } from "../utils";
+
 import lock from "../assets/icons/lock.webp";
-import { useForm } from "../hooks/useForms";
-import { logInValidationSchema } from "../utils/formValidationSchema";
-import useLogin from "../hooks/useLogin";
+
+import { CustomInput } from "./CustomInput";
 import CircularProgress from "@mui/material/CircularProgress";
-import useSignUp from "../hooks/useSignUp";
 import Alert from "@mui/material/Alert";
 
-function LoginForm({ customHandleSubmit }) {
+export function LoginForm({ customHandleSubmit }) {
   const [apiError, setApiError] = useState("");
+  const [signUp, setSignUp] = useState(false);
+
   const { login, laoding } = useLogin({ setApiError });
   const { signUpCall, res } = useSignUp({ setApiError });
-  const [signUp, setSignUp] = useState(false);
 
   const { values, errors, touched, handleChange, handleSubmit } = useForm(
     {
@@ -47,7 +50,6 @@ function LoginForm({ customHandleSubmit }) {
           fullWidth
           variant="outlined"
           id="userId"
-          //   label="User Id"
           name="userId"
           autoComplete="userId"
           autoFocus
@@ -59,12 +61,9 @@ function LoginForm({ customHandleSubmit }) {
         />
         <CustomInput
           fullWidth
-          //   variant="outlined"
           id="password"
-          //   label="User Id"
           name="password"
           autoComplete="password"
-          //   autoFocus
           error={touched.password && Boolean(errors.password)}
           helperText={touched.password && errors.password}
           value={values.password}
@@ -85,5 +84,3 @@ function LoginForm({ customHandleSubmit }) {
     </div>
   );
 }
-
-export default LoginForm;

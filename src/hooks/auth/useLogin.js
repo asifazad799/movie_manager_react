@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { loginAPI } from "../api";
+import { useState } from "react";
 import ls from "localstorage-slim";
-import { useAppStore } from "../store/globalStore";
+
+import { useAppStore } from "../../store";
 import { useNavigate } from "react-router-dom";
 
-function useLogin({ setApiError }) {
+import { loginAPI } from "../../api";
+
+export function useLogin({ setApiError }) {
   const [laoding, setLoading] = useState(false);
   const setLoggedInUser = useAppStore((state) => state.setLoggedInUser);
   const navigate = useNavigate();
@@ -14,7 +16,6 @@ function useLogin({ setApiError }) {
     setApiError("");
     try {
       let res = await loginAPI(body);
-    //   console.log(res?.data, "lkanlbfj");
 
       ls.set(
         "loggedInUser",
@@ -41,5 +42,3 @@ function useLogin({ setApiError }) {
 
   return { login, laoding };
 }
-
-export default useLogin;

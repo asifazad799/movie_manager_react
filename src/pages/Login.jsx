@@ -1,10 +1,10 @@
 import React from "react";
-import BluredPloygons from "../components/BluredPloygons";
-import "../styles/login.css";
-import LoginForm from "../components/LoginForm";
-import DefaultParentComp from "../components/DefaultParentComp";
 
-function Login() {
+import "../styles/login.css";
+
+import { LoginForm, DefaultParentComp } from "../components";
+
+export function Login() {
   return (
     <DefaultParentComp>
       <div className="cercle"></div>
@@ -12,5 +12,3 @@ function Login() {
     </DefaultParentComp>
   );
 }
-
-export default Login;

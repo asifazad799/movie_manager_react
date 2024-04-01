@@ -1,13 +1,12 @@
 import { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
+import { Login } from "./pages";
 import Home from "./pages/Home";
 import ProtuctedRoutes from "./pages/ProtuctedRoutes";
 import UnProtuctedRoutes from "./pages/UnProtuctedRoutes";
 
 function App() {
-
   return (
     <div className="app">
       <BrowserRouter>

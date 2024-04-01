@@ -1,8 +1,8 @@
-import React from "react";
-import { addMovie } from "../api";
-import { useAppStore } from "../store/globalStore";
+import { addMovie } from "../../api";
 
-function useAddMovie({ handleClose, handleSubmit }) {
+import { useAppStore } from "../../store/globalStore";
+
+export function useAddMovie({ handleClose, handleSubmit }) {
   const loggeduser = useAppStore((state) => state?.loggedInUser);
 
   const addMovies = async (data) => {
@@ -18,11 +18,9 @@ function useAddMovie({ handleClose, handleSubmit }) {
       let res = await addMovie(payload);
       handleClose();
       handleSubmit();
-    //   console.log(res);
+      //   console.log(res);
     } catch (error) {}
   };
 
   return { addMovies };
 }
-
-export default useAddMovie;

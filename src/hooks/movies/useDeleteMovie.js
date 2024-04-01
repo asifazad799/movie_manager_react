@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useAppStore } from "../store/globalStore";
-import { deleteMovie } from "../api";
+import { useState } from "react";
+import { useAppStore } from "../../store/globalStore";
+import { deleteMovie } from "../../api";
 
-function useDeleteMovie({ handleDelete }) {
+export function useDeleteMovie({ handleDelete }) {
   const [laoding, setLoading] = useState(false);
   const loggeduser = useAppStore((state) => state?.loggedInUser);
 
@@ -20,5 +20,3 @@ function useDeleteMovie({ handleDelete }) {
 
   return { deleteMovieList, laoding };
 }
-
-export default useDeleteMovie;

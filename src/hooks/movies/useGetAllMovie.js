@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { getAllMovie } from "../api";
+import { useEffect, useState } from "react";
+import { getAllMovie } from "../../api";
 
-function useGetAllMovie({ neList }) {
+export function useGetAllMovie({ neList }) {
   const [allMovie, setAllMovie] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -19,5 +19,3 @@ function useGetAllMovie({ neList }) {
 
   return { getAllMovies, allMovie, setSearch };
 }
-
-export default useGetAllMovie;

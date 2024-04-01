@@ -5,7 +5,6 @@ const baseUrl = "http://localhost:8080";
 
 function setHeaders(req) {
   const loggedUser = ls.get("loggedInUser", { secret: 50 });
-  // console.log(loggedUser, "nkacnka");
   const Token = loggedUser?.state?.loggedInUser?.token;
 
   if (Token) {

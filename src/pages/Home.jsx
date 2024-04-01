@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from "react";
-import DefaultParentComp from "../components/DefaultParentComp";
+
 import "../styles/movieCard.css";
 import "../styles/home.css";
-import CustomInput from "../components/CustomInput";
-import MovieCards from "../components/MovieCards";
+
+import { useLogout, useDeleteMovie, useGetUserMovieList } from "../hooks";
+
 import { Grid } from "@mui/material";
-import AddMovieButton from "../components/AddMovieButton";
-import AddMovieModal from "../components/AddMovieModal";
-import { movieData } from "../utils/sampleStaticData";
-import useGetUserMovieList from "../hooks/useGetUserMovieList";
-import useLogout from "../hooks/useLogout";
-import useDeleteMovie from "../hooks/useDeleteMovie";
+import {
+  DefaultParentComp,
+  CustomInput,
+  MovieCards,
+  AddMovieButton,
+  AddMovieModal,
+} from "../components";
 
 function Home() {
   const [newMovie, setNewMoview] = useState(false);
-  const { callUserMovieList, movieList } = useGetUserMovieList();
-  const { logOut } = useLogout();
   const [list, setList] = useState([]);
-  const handleDelete = (data) => {
-    console.log(data?.movieId, list, "algj");
 
+  const handleDelete = (data) => {
     setList((prev) => prev.filter((movie) => movie?._id !== data?.movieId));
   };
+
+  const { callUserMovieList, movieList } = useGetUserMovieList();
+  const { logOut } = useLogout();
   const { deleteMovieList } = useDeleteMovie({ handleDelete });
 
   useEffect(() => {

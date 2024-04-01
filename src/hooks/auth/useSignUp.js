@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { signAPI } from "../api";
+import { useEffect, useState } from "react";
 
-function useSignUp({ setApiError }) {
+import { signAPI } from "../../api";
+
+export function useSignUp({ setApiError }) {
   const [laoding, setLoading] = useState(false);
   const [res, setRes] = useState({});
 
@@ -38,5 +39,3 @@ function useSignUp({ setApiError }) {
 
   return { signUpCall, laoding, res };
 }
-
-export default useSignUp;

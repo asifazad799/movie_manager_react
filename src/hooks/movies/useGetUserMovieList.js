@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { getUserMovieList } from "../api";
-import { useAppStore } from "../store/globalStore";
+import { useEffect, useState } from "react";
+import { getUserMovieList } from "../../api";
+import { useAppStore } from "../../store";
 
-function useGetUserMovieList() {
+export function useGetUserMovieList() {
   const loggeduser = useAppStore((state) => state?.loggedInUser);
   const [movieList, setMovieList] = useState([]);
 
@@ -14,7 +14,6 @@ function useGetUserMovieList() {
       res?.data?.list[0]?.movieList?.map((val, index) => {
         newList.push({ ...data[index], watched: val?.watched });
       });
-    //   console.log(newList, "njnjnj");
       setMovieList(() => newList);
     } catch (error) {}
   };
@@ -25,5 +24,3 @@ function useGetUserMovieList() {
 
   return { callUserMovieList, movieList };
 }
-
-export default useGetUserMovieList;
