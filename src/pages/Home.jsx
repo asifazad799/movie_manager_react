@@ -14,7 +14,7 @@ import {
   AddMovieModal,
 } from "../components";
 
-function Home() {
+export function Home() {
   const [newMovie, setNewMoview] = useState(false);
   const [list, setList] = useState([]);
 
@@ -83,5 +83,3 @@ function Home() {
     </DefaultParentComp>
   );
 }
-
-export default Home;

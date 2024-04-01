@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import { useAppStore } from "../store";
 
-function ProtuctedRoutes() {
+export function ProtuctedRoutes() {
   const loggeduser = useAppStore((state) => state?.loggedInUser);
   const navigate = useNavigate();
 
@@ -25,5 +25,3 @@ function ProtuctedRoutes() {
 
   return <Outlet />;
 }
-
-export default ProtuctedRoutes;

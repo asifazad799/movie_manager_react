@@ -7,9 +7,6 @@
 }
 
 .searchSec {
-  /* width: 100%;
-  display: flex;
-  gap: 10px; */
   align-items: flex-end;
 }
 
@@ -22,8 +19,6 @@
   background-position: center center;
   background-size: cover;
   position: relative;
-  /* box-shadow: inset 15px -185px 261px -44px #000000; */
-  /* box-shadow: inset 15px -185px 261px -44px #000000; */
 }
 
 .hoverLayer {

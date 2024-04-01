@@ -1,10 +1,9 @@
-import { useState } from "react";
-import "./App.css";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login } from "./pages";
-import Home from "./pages/Home";
-import ProtuctedRoutes from "./pages/ProtuctedRoutes";
-import UnProtuctedRoutes from "./pages/UnProtuctedRoutes";
+
+import "./App.css";
+
+import { Login, Home, ProtuctedRoutes, UnProtuctedRoutes } from "./pages";
 
 function App() {
   return (

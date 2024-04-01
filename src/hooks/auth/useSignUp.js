@@ -13,9 +13,7 @@ export function useSignUp({ setApiError }) {
 
     setApiError("");
     try {
-      console.log(data, "akjfnj");
       let res = await signAPI(data);
-      console.log(res?.data);
       setRes(() => {
         return res?.status;
       });
@@ -33,9 +31,9 @@ export function useSignUp({ setApiError }) {
     }
   };
 
-  useEffect(() => {
-    clearInterval(timer);
-  }, [res]);
+  // useEffect(() => {
+  //   clearTimeout(timer);
+  // }, [res]);
 
   return { signUpCall, laoding, res };
 }
