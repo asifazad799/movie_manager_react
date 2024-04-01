@@ -1,7 +1,7 @@
 import React from "react";
 
-import "../styles/movieCard.css";
-import "../styles/home.css";
+import "../../../styles/movieCard.css";
+import "../../../styles/home.css";
 
 export function AddMovieButton({ hanleClick, title }) {
   return (

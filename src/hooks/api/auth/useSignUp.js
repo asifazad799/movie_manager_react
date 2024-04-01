@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { signAPI } from "../../api";
+import { signAPI } from "../../../api";
 
-export function useSignUp({ setApiError }) {
+export function useSignUp() {
   const [laoding, setLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
   const [res, setRes] = useState({});
-
-  let timer;
 
   const signUpCall = async (data) => {
     setLoading(true);
@@ -18,12 +17,6 @@ export function useSignUp({ setApiError }) {
         return res?.status;
       });
 
-      let timer = setTimeout(() => {
-        setRes(null);
-      }, 2000);
-
-      //   clearInterval(timer);
-
       setLoading(false);
     } catch (error) {
       setApiError(() => error?.response?.data?.message);
@@ -31,9 +24,5 @@ export function useSignUp({ setApiError }) {
     }
   };
 
-  // useEffect(() => {
-  //   clearTimeout(timer);
-  // }, [res]);
-
-  return { signUpCall, laoding, res };
+  return { signUpCall, laoding, res, apiError };
 }

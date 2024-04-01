@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 
-import "../styles/modal.css";
-import "../styles/home.css";
-import "../styles/movieCard.css";
+import "../../../styles/modal.css";
+import "../../../styles/home.css";
+import "../../../styles/movieCard.css";
 
-import { useAddMovie, useGetAllMovie } from "../hooks";
+import { useAddMovie, useGetAllMovie } from "../../../hooks";
 
 import { Dialog, Grid } from "@mui/material";
 import { Checkbox } from "@mui/material";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUncheckedRounded";
-import { AddMovieButton } from "./AddMovieButton";
-import { MovieCards } from "./MovieCards";
-import { DebouncedInput } from "./DebouncedInput";
+import { MovieCards } from "../../cards";
+import { DebouncedInput, AddMovieButton } from "..";
 
 export function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
   const [selected, setSelectedList] = useState({});

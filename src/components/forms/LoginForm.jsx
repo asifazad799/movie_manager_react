@@ -1,21 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import { useForm, useLogin, useSignUp } from "../hooks";
+import { useForm, useLogin } from "../../hooks";
 
-import { logInValidationSchema } from "../utils";
+import { logInValidationSchema } from "../../utils";
 
-import lock from "../assets/icons/lock.webp";
+import lock from "../../assets/icons/lock.webp";
 
-import { CustomInput } from "./CustomInput";
+import { CustomInput } from "../common";
 import CircularProgress from "@mui/material/CircularProgress";
-import Alert from "@mui/material/Alert";
 
 export function LoginForm({ customHandleSubmit }) {
-  const [apiError, setApiError] = useState("");
-  const [signUp, setSignUp] = useState(false);
+  const navigate = useNavigate();
 
-  const { login, laoding } = useLogin({ setApiError });
-  const { signUpCall, res } = useSignUp({ setApiError });
+  const { login, laoding, apiError } = useLogin();
 
   const { values, errors, touched, handleChange, handleSubmit } = useForm(
     {
@@ -24,27 +22,20 @@ export function LoginForm({ customHandleSubmit }) {
     },
     (values) => {
       values.password = Number(values.password);
-      if (signUp) signUpCall(values);
-      else login(values);
+      login(values);
     },
     logInValidationSchema
   );
 
   const handleSwitch = () => {
-    setSignUp((prev) => !prev);
+    navigate("/sign-up");
   };
 
   return (
     <div className="login-form d-flex">
-      <p className="defaultFont">{signUp ? "Sign Up" : "Log In"}</p>
+      <p className="defaultFont">{"Log In"}</p>
       <form className="form" onSubmit={handleSubmit}>
-        {res == 200 ? (
-          <Alert style={{ width: "100%" }} severity="success">
-            Your user created
-          </Alert>
-        ) : (
-          <img src={lock} className="lockIcon" />
-        )}
+        <img src={lock} className="lockIcon" />
 
         <CustomInput
           fullWidth
@@ -71,7 +62,7 @@ export function LoginForm({ customHandleSubmit }) {
           title={"Password"}
         />
         <p className="defaultFontFam text2" onClick={handleSwitch}>
-          {!signUp ? "Sign Up?" : "Log In?"}
+          Sign Up?
         </p>
         <div style={{ width: "100%" }}>
           {apiError && <p className="defaultFontFam errorTxt">{apiError}</p>}

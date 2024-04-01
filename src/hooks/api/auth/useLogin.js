@@ -1,13 +1,15 @@
 import { useState } from "react";
 import ls from "localstorage-slim";
 
-import { useAppStore } from "../../store";
+import { useAppStore } from "../../../store";
 import { useNavigate } from "react-router-dom";
 
-import { loginAPI } from "../../api";
+import { loginAPI } from "../../../api";
 
-export function useLogin({ setApiError }) {
+export function useLogin() {
   const [laoding, setLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
+
   const setLoggedInUser = useAppStore((state) => state.setLoggedInUser);
   const navigate = useNavigate();
 
@@ -40,5 +42,5 @@ export function useLogin({ setApiError }) {
     }
   };
 
-  return { login, laoding };
+  return { login, laoding, apiError };
 }

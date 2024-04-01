@@ -1,5 +1,5 @@
-import React from "react";
 import ls from "localstorage-slim";
+
 import { useNavigate } from "react-router-dom";
 
 export function useLogout() {

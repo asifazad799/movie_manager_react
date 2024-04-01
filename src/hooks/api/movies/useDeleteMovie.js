@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useAppStore } from "../../store/globalStore";
-import { deleteMovie } from "../../api";
+import { useAppStore } from "../../../store/globalStore";
+import { deleteMovie } from "../../../api";
 
 export function useDeleteMovie({ handleDelete }) {
   const [laoding, setLoading] = useState(false);

@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/customInput.css";
+import "../../../styles/customInput.css";
 
 import { InputLabel, TextField } from "@mui/material";
 

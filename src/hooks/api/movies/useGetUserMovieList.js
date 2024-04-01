@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getUserMovieList } from "../../api";
-import { useAppStore } from "../../store";
+import { getUserMovieList } from "../../../api";
+import { useAppStore } from "../../../store";
 
 export function useGetUserMovieList() {
   const loggeduser = useAppStore((state) => state?.loggedInUser);

@@ -1,6 +1,6 @@
-import { addMovie } from "../../api";
+import { addMovie } from "../../../api";
 
-import { useAppStore } from "../../store/globalStore";
+import { useAppStore } from "../../../store/globalStore";
 
 export function useAddMovie({ handleClose, handleSubmit }) {
   const loggeduser = useAppStore((state) => state?.loggedInUser);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllMovie } from "../../api";
+import { getAllMovie } from "../../../api";
 
 export function useGetAllMovie({ neList }) {
   const [allMovie, setAllMovie] = useState([]);

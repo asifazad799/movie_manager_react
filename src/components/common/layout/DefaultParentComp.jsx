@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BluredPloygons } from "./BluredPloygons";
+import { BluredPloygons } from "../static-poligons";
 
 export function DefaultParentComp({ children }) {
   return (
