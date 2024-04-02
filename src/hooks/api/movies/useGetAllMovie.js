@@ -7,7 +7,13 @@ export function useGetAllMovie({ neList }) {
 
   const getAllMovies = async () => {
     try {
-      let res = await getAllMovie({ neList: neList.join(","), search: search });
+      let payload = { search: search };
+      if (neList?.length) {
+        payload.neList = neList?.join(",");
+      }
+      let res = await getAllMovie({
+        ...payload,
+      });
       setAllMovie(() => res?.data?.list);
     } catch (error) {}
   };

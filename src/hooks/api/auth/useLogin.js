@@ -17,25 +17,24 @@ export function useLogin() {
     setLoading(true);
     setApiError("");
     try {
-      let res = await loginAPI(body);
-
-      ls.set(
-        "loggedInUser",
-        {
+      await loginAPI(body).then((res) => {
+        ls.set(
+          "loggedInUser",
+          {
+            token: res?.data?.token,
+            user: res?.data?.user,
+            expiry: res?.data?.expiry,
+          },
+          { secret: 50 }
+        );
+        setLoggedInUser({
           token: res?.data?.token,
           user: res?.data?.user,
           expiry: res?.data?.expiry,
-        },
-        { secret: 50 }
-      );
-      setLoggedInUser({
-        token: res?.data?.token,
-        user: res?.data?.user,
-        expiry: res?.data?.expiry,
+        });
+        navigate("/home");
+        setLoading(false);
       });
-      navigate("/home");
-      setLoading(false);
-      return;
     } catch (error) {
       setApiError(() => error?.response?.data?.message);
       setLoading(false);

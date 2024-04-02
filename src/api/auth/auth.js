@@ -1,9 +1,9 @@
-import { API } from "../config";
+import { UNPROTECTED_API } from "../config/config";
 
 export const loginAPI = (body) => {
-  return API.post("/auth/log-in", { ...body });
+  return UNPROTECTED_API.post("/auth/log-in", { ...body });
 };
 
 export const signAPI = (body) => {
-  return API.post("/auth/sign-up", { ...body });
+  return UNPROTECTED_API.post("/auth/sign-up", { ...body });
 };

@@ -1,4 +1,4 @@
-import { API } from "../config";
+import { API } from "../config/config";
 
 export const getUserMovieList = (param) => {
   return API.get("/movie/user-movie-list", { params: param });

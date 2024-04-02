@@ -4,21 +4,31 @@ import { useAppStore } from "../../../store/globalStore";
 
 export function useAddMovie({ handleClose, handleSubmit }) {
   const loggeduser = useAppStore((state) => state?.loggedInUser);
+  const setLoggedInUser = useAppStore((state) => state.setLoggedInUser);
 
   const addMovies = async (data) => {
     try {
       let payload = {
         userId: loggeduser?.user?._id,
-        movieListId: loggeduser?.user?.movieListId,
+        movieListId: loggeduser?.user?.movieListId || "",
         selectedlist: Object.values(data?.selected)?.map((val) => ({
           movieId: val?._id,
         })),
       };
 
-      let res = await addMovie(payload);
+      await addMovie(payload).then((res) => {
+        if (!loggeduser?.user?.movieListId) {
+          setLoggedInUser({
+            ...loggeduser,
+            user: {
+              ...loggeduser.user,
+              movieListId: res?.data?.movieList?._id,
+            },
+          });
+        }
+      });
       handleClose();
       handleSubmit();
-      //   console.log(res);
     } catch (error) {}
   };
 

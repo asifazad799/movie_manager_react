@@ -9,8 +9,7 @@ export function useDeleteMovie({ handleDelete }) {
   const deleteMovieList = async (data) => {
     setLoading(true);
     try {
-      let res = await deleteMovie({ ...data, userId: loggeduser?.user?._id });
-      console.log({ ...data, userId: loggeduser?.user?._id }, res, "kjbb");
+      await deleteMovie({ ...data, userId: loggeduser?.user?._id });
       handleDelete(data);
       setLoading(false);
     } catch (error) {
