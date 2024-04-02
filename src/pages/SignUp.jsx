@@ -9,12 +9,11 @@ import "../styles/login.css";
 import lock from "../assets/icons/lock.webp";
 
 import CircularProgress from "@mui/material/CircularProgress";
-import Alert from "@mui/material/Alert";
 import { CustomInput, DefaultParentComp } from "../components";
 
 export function SignUp() {
   const navigate = useNavigate();
-  const { signUpCall, res, laoding, apiError } = useSignUp();
+  const { signUpCall, laoding, apiError } = useSignUp();
 
   const { values, errors, touched, handleChange, handleSubmit } = useForm(
     {
@@ -37,14 +36,7 @@ export function SignUp() {
       <div className="login-form d-flex">
         <p className="defaultFont">Sign Up</p>
         <form className="form" onSubmit={handleSubmit}>
-          {res == 200 ? (
-            <Alert style={{ width: "100%" }} severity="success">
-              Your user created
-            </Alert>
-          ) : (
-            <img src={lock} className="lockIcon" />
-          )}
-
+          <img src={lock} className="lockIcon" />
           <CustomInput
             fullWidth
             variant="outlined"
