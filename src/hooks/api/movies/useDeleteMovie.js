@@ -1,6 +1,12 @@
 import { useState } from "react";
+
 import { useAppStore } from "../../../store/globalStore";
+
 import { deleteMovie } from "../../../api";
+
+import { getErrorMessageFormAPI } from "../../../utils";
+
+import { customtToast } from "../../../components";
 
 export function useDeleteMovie({ handleDelete }) {
   const [laoding, setLoading] = useState(false);
@@ -13,6 +19,7 @@ export function useDeleteMovie({ handleDelete }) {
       handleDelete(data);
       setLoading(false);
     } catch (error) {
+      customtToast("error", getErrorMessageFormAPI(error));
       setLoading(false);
     }
   };

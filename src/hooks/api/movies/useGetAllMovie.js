@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
+
 import { getAllMovie } from "../../../api";
+
+import { customtToast } from "../../../components";
+
+import { getErrorMessageFormAPI } from "../../../utils";
 
 export function useGetAllMovie({ neList }) {
   const [allMovie, setAllMovie] = useState([]);
@@ -15,7 +20,9 @@ export function useGetAllMovie({ neList }) {
         ...payload,
       });
       setAllMovie(() => res?.data?.list);
-    } catch (error) {}
+    } catch (error) {
+      customtToast("error", getErrorMessageFormAPI(error));
+    }
   };
 
   useEffect(() => {

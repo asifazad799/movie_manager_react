@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
+
 import { getUserMovieList } from "../../../api";
+
 import { useAppStore } from "../../../store";
+
+import { customtToast } from "../../../components";
+
+import { getErrorMessageFormAPI } from "../../../utils";
 
 export function useGetUserMovieList() {
   const loggeduser = useAppStore((state) => state?.loggedInUser);
@@ -15,7 +21,9 @@ export function useGetUserMovieList() {
         newList.push({ ...data[index], watched: val?.watched });
       });
       setMovieList(() => newList);
-    } catch (error) {}
+    } catch (error) {
+      customtToast("error", getErrorMessageFormAPI(error));
+    }
   };
 
   useEffect(() => {

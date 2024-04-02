@@ -2,6 +2,10 @@ import { addMovie } from "../../../api";
 
 import { useAppStore } from "../../../store/globalStore";
 
+import { getErrorMessageFormAPI } from "../../../utils";
+
+import { customtToast } from "../../../components";
+
 export function useAddMovie({ handleClose, handleSubmit }) {
   const loggeduser = useAppStore((state) => state?.loggedInUser);
   const setLoggedInUser = useAppStore((state) => state.setLoggedInUser);
@@ -29,7 +33,9 @@ export function useAddMovie({ handleClose, handleSubmit }) {
       });
       handleClose();
       handleSubmit();
-    } catch (error) {}
+    } catch (error) {
+      customtToast("error", getErrorMessageFormAPI(error));
+    }
   };
 
   return { addMovies };

@@ -2,7 +2,9 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 
+import { ToastContainer } from "react-toastify";
 import {
   Login,
   Home,
@@ -14,6 +16,7 @@ import {
 function App() {
   return (
     <div className="app">
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route element={<UnProtuctedRoutes />}>
