@@ -8,27 +8,31 @@ import { useLogout, useDeleteMovie, useGetUserMovieList } from "../hooks";
 import { Grid } from "@mui/material";
 import {
   DefaultParentComp,
-  CustomInput,
   MovieCards,
   AddMovieButton,
   AddMovieModal,
+  DebouncedInput,
 } from "../components";
 
 export function Home() {
   const [newMovie, setNewMoview] = useState(false);
-  const [list, setList] = useState([]);
+  const [search, setSearch] = useState("");
 
-  const handleDelete = (data) => {
-    setList((prev) => prev.filter((movie) => movie?._id !== data?.movieId));
+  const { callUserMovieList, movieList } = useGetUserMovieList({
+    search: search,
+  });
+  const { logOut } = useLogout();
+  const { deleteMovieList } = useDeleteMovie();
+
+  const handleSearch = (value) => {
+    setSearch(value);
   };
 
-  const { callUserMovieList, movieList } = useGetUserMovieList();
-  const { logOut } = useLogout();
-  const { deleteMovieList } = useDeleteMovie({ handleDelete });
-
-  useEffect(() => {
-    setList(() => movieList);
-  }, [movieList]);
+  const hanleDelete = (data) => {
+    deleteMovieList(data).then(() => {
+      callUserMovieList();
+    });
+  };
 
   return (
     <DefaultParentComp>
@@ -41,10 +45,8 @@ export function Home() {
         </div>
         <Grid container spacing={1} className="searchSec">
           <Grid xs={12} sm={9} md={10} item>
-            <CustomInput
-              fullWidth
-              variant="outlined"
-              id="userId"
+            <DebouncedInput
+              handleChange={handleSearch}
               label="Search"
               title={"Search Your Movie"}
             />
@@ -60,10 +62,10 @@ export function Home() {
         {/* </div> */}
         <div className="movieList">
           <Grid container spacing={1}>
-            {list?.map((movie) => {
+            {movieList?.map((movie) => {
               return (
                 <Grid key={movie?.title} xs={12} sm={6} md={4} item>
-                  <MovieCards handleDelete={deleteMovieList} {...movie} />
+                  <MovieCards handleDelete={hanleDelete} {...movie} />
                 </Grid>
               );
             })}

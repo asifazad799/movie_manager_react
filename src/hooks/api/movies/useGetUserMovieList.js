@@ -8,13 +8,16 @@ import { customtToast } from "../../../components";
 
 import { getErrorMessageFormAPI } from "../../../utils";
 
-export function useGetUserMovieList() {
+export function useGetUserMovieList({ search }) {
   const loggeduser = useAppStore((state) => state?.loggedInUser);
   const [movieList, setMovieList] = useState([]);
 
   const callUserMovieList = async () => {
     try {
-      let res = await getUserMovieList({ userId: loggeduser?.user?._id });
+      let res = await getUserMovieList({
+        userId: loggeduser?.user?._id,
+        search,
+      });
       let data = res?.data?.list[0]?.newMovieList;
       let newList = [];
       res?.data?.list[0]?.movieList?.map((val, index) => {
@@ -28,7 +31,7 @@ export function useGetUserMovieList() {
 
   useEffect(() => {
     callUserMovieList();
-  }, []);
+  }, [search]);
 
   return { callUserMovieList, movieList };
 }

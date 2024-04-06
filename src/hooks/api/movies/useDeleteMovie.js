@@ -8,7 +8,7 @@ import { getErrorMessageFormAPI } from "../../../utils";
 
 import { customtToast } from "../../../components";
 
-export function useDeleteMovie({ handleDelete }) {
+export function useDeleteMovie() {
   const [laoding, setLoading] = useState(false);
   const loggeduser = useAppStore((state) => state?.loggedInUser);
 
@@ -16,7 +16,6 @@ export function useDeleteMovie({ handleDelete }) {
     setLoading(true);
     try {
       await deleteMovie({ ...data, userId: loggeduser?.user?._id });
-      handleDelete(data);
       setLoading(false);
     } catch (error) {
       customtToast("error", getErrorMessageFormAPI(error));
