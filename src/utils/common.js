@@ -1,1 +1,2 @@
-export const getErrorMessageFormAPI = (error) => error?.response?.data?.message;
+export const getErrorMessageFormAPI = (error) =>
+  error?.message || error?.response?.data?.message;

@@ -10,8 +10,16 @@ export function useAddMovie({ handleClose, handleSubmit }) {
   const loggeduser = useAppStore((state) => state?.loggedInUser);
   const setLoggedInUser = useAppStore((state) => state.setLoggedInUser);
 
+  const checkEmpty = (list) => {
+    if (list?.length === 0) {
+      throw new Error("Please select one movie");
+    }
+  };
+
   const addMovies = async (data) => {
     try {
+      checkEmpty(Object.values(data?.selected));
+
       let payload = {
         userId: loggeduser?.user?._id,
         movieListId: loggeduser?.user?.movieListId || "",

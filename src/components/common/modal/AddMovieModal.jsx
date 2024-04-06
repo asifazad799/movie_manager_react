@@ -19,9 +19,13 @@ export function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
   const { allMovie, setSearch } = useGetAllMovie({ neList });
   const { addMovies } = useAddMovie({ handleClose, handleSubmit });
 
-  const handleSelect = (val, index) => {
+  const handleSelect = (val, index, selected) => {
     setSelectedList((prev) => {
-      return { ...prev, [index]: { ...val, selected: true } };
+      if (selected === false && prev?.[index]) {
+        delete prev[index];
+        return { ...prev };
+      }
+      return { ...prev, [index]: { ...val, selected: selected } };
     });
   };
 
@@ -87,7 +91,11 @@ export function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
                               }
                               checked={selected[index]?.selected || false}
                               onClick={() => {
-                                handleSelect(movie, index);
+                                handleSelect(
+                                  movie,
+                                  index,
+                                  !selected[index]?.selected
+                                );
                               }}
                             />
                           </div>

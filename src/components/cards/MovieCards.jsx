@@ -60,8 +60,6 @@ export function MovieCards({
       ) : (
         ""
       )}
-      {/* <img src={backdrop} /> */}
-      {/* {title} */}
     </div>
   );
 }

@@ -13,17 +13,20 @@ export function useGetUserMovieList({ search }) {
   const [movieList, setMovieList] = useState([]);
 
   const callUserMovieList = async () => {
+    let payload = { userId: loggeduser?.user?._id };
+
+    if (search) {
+      payload["search"] = search;
+    }
+
     try {
-      let res = await getUserMovieList({
-        userId: loggeduser?.user?._id,
-        search,
-      });
-      let data = res?.data?.list[0]?.newMovieList;
+      let res = await getUserMovieList(payload);
       let newList = [];
-      res?.data?.list[0]?.movieList?.map((val, index) => {
-        newList.push({ ...data[index], watched: val?.watched });
+      res?.data?.list?.newMovieList?.map((val) => {
+        newList.push(val);
       });
-      setMovieList(() => newList);
+
+      setMovieList(() => [...newList]);
     } catch (error) {
       customtToast("error", getErrorMessageFormAPI(error));
     }
