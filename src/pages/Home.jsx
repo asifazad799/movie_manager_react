@@ -75,7 +75,6 @@ export function Home() {
       {newMovie && (
         <AddMovieModal
           handleSubmit={callUserMovieList}
-          neList={movieList.map((val) => val?._id)}
           open={newMovie}
           handleClose={() => {
             setNewMoview(false);

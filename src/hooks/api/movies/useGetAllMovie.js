@@ -6,18 +6,18 @@ import { customtToast } from "../../../components";
 
 import { getErrorMessageFormAPI } from "../../../utils";
 
-export function useGetAllMovie({ neList }) {
+import { useAppStore } from "../../../store";
+
+export function useGetAllMovie() {
+  const loggeduser = useAppStore((state) => state?.loggedInUser);
   const [allMovie, setAllMovie] = useState([]);
   const [search, setSearch] = useState("");
 
   const getAllMovies = async () => {
     try {
-      let payload = { search: search };
-      if (neList?.length) {
-        payload.neList = neList?.join(",");
-      }
       let res = await getAllMovie({
-        ...payload,
+        search: search,
+        userId: loggeduser?.user?._id,
       });
       setAllMovie(() => res?.data?.list);
     } catch (error) {

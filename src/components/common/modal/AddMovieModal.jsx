@@ -13,10 +13,10 @@ import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUnch
 import { MovieCards } from "../../cards";
 import { DebouncedInput, AddMovieButton } from "..";
 
-export function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
+export function AddMovieModal({ handleClose, open, handleSubmit }) {
   const [selected, setSelectedList] = useState({});
 
-  const { allMovie, setSearch } = useGetAllMovie({ neList });
+  const { allMovie, setSearch } = useGetAllMovie();
   const { addMovies } = useAddMovie({ handleClose, handleSubmit });
 
   const handleSelect = (val, index, selected) => {
