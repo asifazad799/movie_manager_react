@@ -31,6 +31,9 @@ jobs:
           env=$(aws ssm get-parameter --name movie-react-app --query 'Parameter.Value' --output text)
           echo "$env" > .prod.env
 
+      - name: Install env-cmd
+        run: npm install --froce -g env-cmd
+
       - name: Install Dependencies
         run: |
           node --version
