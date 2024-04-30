@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
+    "dev": "env-cmd -f .dev.env vite --host",
+    "prod": "env-cmd -f .prod.env vite --host",
+    "build:dev": "env-cmd -f .dev.env vite build",
+    "build:prod": "env-cmd -f .prod.env vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -16,6 +18,7 @@
     "@mui/material": "^5.15.0",
     "@mui/styles": "^5.14.20",
     "axios": "^1.6.2",
+    "env-cmd": "^10.1.0",
     "formik": "^2.4.5",
     "localstorage-slim": "^2.7.0",
     "react": "^18.2.0",
