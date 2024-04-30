@@ -6,7 +6,6 @@ on:
 
 env:
   BUCKET: movieapp.asifazad799.online
-  DIST: build
   REGION: eu-north-1
   DIST_ID: E25M6XRGA3LJKV
 
@@ -44,7 +43,7 @@ jobs:
 
       - name: Copy files to the production website with the AWS CLI
         run: |
-          aws s3 sync --delete ${{ env.DIST }} s3://${{ env.BUCKET }}
+          aws s3 sync --delete ./ s3://${{ env.BUCKET }}
 
       - name: Copy files to the production website with the AWS CLI
         run: |
