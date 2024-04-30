@@ -5,10 +5,10 @@ on:
     branches: [master]
 
 env:
-  BUCKET: ${{ secret.AWS_S3_BUCKET_NAME }}
+  BUCKET: movieapp.asifazad799.online
   DIST: build
   REGION: eu-north-1
-  DIST_ID: ${{ secret.AWS_CLOUD_FLARE_DIST_ID }}
+  DIST_ID: E25M6XRGA3LJKV
 
 jobs:
   deploy:
