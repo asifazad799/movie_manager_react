@@ -40,7 +40,7 @@ jobs:
           npm i --force
 
       - name: Build Static Website
-        run: env-cmd -f .prod.env vite build
+        run: npm run build:prod
 
       - name: Copy files to the production website with the AWS CLI
         run: |
