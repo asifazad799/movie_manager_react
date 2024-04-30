@@ -1,18 +1,19 @@
-import React, { useState } from "react";
-import CustomInput from "../components/CustomInput";
-import lock from "../assets/icons/lock.webp";
-import { useForm } from "../hooks/useForms";
-import { logInValidationSchema } from "../utils/formValidationSchema";
-import useLogin from "../hooks/useLogin";
-import CircularProgress from "@mui/material/CircularProgress";
-import useSignUp from "../hooks/useSignUp";
-import Alert from "@mui/material/Alert";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function LoginForm({ customHandleSubmit }) {
-  const [apiError, setApiError] = useState("");
-  const { login, laoding } = useLogin({ setApiError });
-  const { signUpCall, res } = useSignUp({ setApiError });
-  const [signUp, setSignUp] = useState(false);
+import { useForm, useLogin } from "../../hooks";
+
+import { logInValidationSchema } from "../../utils";
+
+import lock from "../../assets/icons/lock.webp";
+
+import { CustomInput } from "../common";
+import CircularProgress from "@mui/material/CircularProgress";
+
+export function LoginForm({ customHandleSubmit }) {
+  const navigate = useNavigate();
+
+  const { login, laoding, apiError } = useLogin();
 
   const { values, errors, touched, handleChange, handleSubmit } = useForm(
     {
@@ -21,33 +22,25 @@ function LoginForm({ customHandleSubmit }) {
     },
     (values) => {
       values.password = Number(values.password);
-      if (signUp) signUpCall(values);
-      else login(values);
+      login(values);
     },
     logInValidationSchema
   );
 
   const handleSwitch = () => {
-    setSignUp((prev) => !prev);
+    navigate("/sign-up");
   };
 
   return (
     <div className="login-form d-flex">
-      <p className="defaultFont">{signUp ? "Sign Up" : "Log In"}</p>
+      <p className="defaultFont">{"Log In"}</p>
       <form className="form" onSubmit={handleSubmit}>
-        {res == 200 ? (
-          <Alert style={{ width: "100%" }} severity="success">
-            Your user created
-          </Alert>
-        ) : (
-          <img src={lock} className="lockIcon" />
-        )}
+        <img src={lock} className="lockIcon" />
 
         <CustomInput
           fullWidth
           variant="outlined"
           id="userId"
-          //   label="User Id"
           name="userId"
           autoComplete="userId"
           autoFocus
@@ -59,12 +52,9 @@ function LoginForm({ customHandleSubmit }) {
         />
         <CustomInput
           fullWidth
-          //   variant="outlined"
           id="password"
-          //   label="User Id"
           name="password"
           autoComplete="password"
-          //   autoFocus
           error={touched.password && Boolean(errors.password)}
           helperText={touched.password && errors.password}
           value={values.password}
@@ -72,7 +62,7 @@ function LoginForm({ customHandleSubmit }) {
           title={"Password"}
         />
         <p className="defaultFontFam text2" onClick={handleSwitch}>
-          {!signUp ? "Sign Up?" : "Log In?"}
+          Sign Up?
         </p>
         <div style={{ width: "100%" }}>
           {apiError && <p className="defaultFontFam errorTxt">{apiError}</p>}
@@ -85,5 +75,3 @@ function LoginForm({ customHandleSubmit }) {
     </div>
   );
 }
-
-export default LoginForm;

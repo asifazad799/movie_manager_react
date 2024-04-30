@@ -1,12 +1,11 @@
 import React, { useState } from "react";
+
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import { Checkbox } from "@mui/material";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUncheckedRounded";
 
-function MovieCards({
-  title,
-  backdrop,
+export function MovieCards({
   poster,
   customHandler,
   selected,
@@ -17,7 +16,7 @@ function MovieCards({
 
   return (
     <div
-      className="login-form d-flex movieListCard"
+      className="d-flex movieListCard"
       style={{ backgroundImage: `url(${poster})` }}
       onMouseEnter={() => {
         setHover((pre) => !pre);
@@ -61,10 +60,6 @@ function MovieCards({
       ) : (
         ""
       )}
-      {/* <img src={backdrop} /> */}
-      {/* {title} */}
     </div>
   );
 }
-
-export default MovieCards;

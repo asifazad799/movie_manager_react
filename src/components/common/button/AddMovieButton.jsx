@@ -1,8 +1,9 @@
 import React from "react";
-import "../styles/movieCard.css";
-import "../styles/home.css";
 
-function AddMovieButton({ hanleClick, title }) {
+import "../../../styles/movieCard.css";
+import "../../../styles/home.css";
+
+export function AddMovieButton({ hanleClick, title }) {
   return (
     <button
       onClick={hanleClick}
@@ -15,5 +16,3 @@ function AddMovieButton({ hanleClick, title }) {
     </button>
   );
 }
-
-export default AddMovieButton;

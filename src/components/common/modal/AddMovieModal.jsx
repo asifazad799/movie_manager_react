@@ -1,28 +1,31 @@
-import { Dialog, Grid } from "@mui/material";
 import React, { useState } from "react";
-import "../styles/modal.css";
-import "../styles/home.css";
-import "../styles/movieCard.css";
-import CustomInput from "./CustomInput";
-import AddMovieButton from "./AddMovieButton";
-import { movieData } from "../utils/sampleStaticData";
-import MovieCards from "./MovieCards";
-import useGetAllMovie from "../hooks/useGetAllMovie";
-import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+
+import "../../../styles/modal.css";
+import "../../../styles/home.css";
+import "../../../styles/movieCard.css";
+
+import { useAddMovie, useGetAllMovie } from "../../../hooks";
+
+import { Dialog, Grid } from "@mui/material";
 import { Checkbox } from "@mui/material";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUncheckedRounded";
-import useAddMovie from "../hooks/useAddMovie";
-import DebouncedInput from "./DebouncedInput";
+import { MovieCards } from "../../cards";
+import { DebouncedInput, AddMovieButton } from "..";
 
-function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
-  const { getAllMovies, allMovie, setSearch } = useGetAllMovie({ neList });
-  const { addMovies } = useAddMovie({ handleClose, handleSubmit });
+export function AddMovieModal({ handleClose, open, handleSubmit }) {
   const [selected, setSelectedList] = useState({});
 
-  const handleSelect = (val, index) => {
+  const { allMovie, setSearch } = useGetAllMovie();
+  const { addMovies } = useAddMovie({ handleClose, handleSubmit });
+
+  const handleSelect = (val, index, selected) => {
     setSelectedList((prev) => {
-      return { ...prev, [index]: { ...val, selected: true } };
+      if (selected === false && prev?.[index]) {
+        delete prev[index];
+        return { ...prev };
+      }
+      return { ...prev, [index]: { ...val, selected: selected } };
     });
   };
 
@@ -36,13 +39,12 @@ function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
       maxWidth={"md"}
       open={open}
       onClose={handleClose}
-      //   backdropProps={{}}
       PaperProps={{
         style: {
           width: "96%",
           margin: "0px",
-          backgroundColor: "transparent", // Set the dialog background to transparent
-          boxShadow: "none", // Optional: removes the default shadow
+          backgroundColor: "transparent",
+          boxShadow: "none",
         },
       }}
       slotProps={{
@@ -57,22 +59,10 @@ function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
       <div className="homeContainer modalContainer">
         <Grid container spacing={1} className="searchSec">
           <Grid xs={12} sm={9} md={10} item>
-            {/* <CustomInput
-              fullWidth
-              variant="outlined"
-              id="userId"
-              label="Search"
-              title={"Search New Movie"}
-            /> */}
             <DebouncedInput handleChange={handleSearch} />
           </Grid>
           <Grid xs={12} sm={3} md={2} item>
-            <AddMovieButton
-              title={"Seacrh"}
-              //   hanleClick={() => {
-              //     setNewMoview(true);
-              //   }}
-            />
+            <AddMovieButton title={"Seacrh"} />
           </Grid>
         </Grid>
         <div className="movieList">
@@ -86,11 +76,6 @@ function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
                       {...movie}
                       customHandler={
                         <div className="hoverLayer">
-                          {/* <DeleteOutlineRoundedIcon
-                            className="deleteIcon"
-                            color="red"
-                          /> */}
-
                           <div className="watchToggleSection">
                             <p className="defaultFontFam">
                               {selected[index]?.selected
@@ -106,7 +91,11 @@ function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
                               }
                               checked={selected[index]?.selected || false}
                               onClick={() => {
-                                handleSelect(movie, index);
+                                handleSelect(
+                                  movie,
+                                  index,
+                                  !selected[index]?.selected
+                                );
                               }}
                             />
                           </div>
@@ -129,5 +118,3 @@ function AddMovieModal({ handleClose, open, neList, handleSubmit }) {
     </Dialog>
   );
 }
-
-export default AddMovieModal;

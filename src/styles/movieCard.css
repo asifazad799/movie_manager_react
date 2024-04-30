@@ -7,22 +7,18 @@
 }
 
 .searchSec {
-  /* width: 100%;
-  display: flex;
-  gap: 10px; */
   align-items: flex-end;
 }
 
 .movieListCard {
+  min-width: 276px;
+  min-height: 400px;
   padding: 0px;
   border-radius: 4px;
-  width: auto;
   overflow: hidden;
   background-position: center center;
   background-size: cover;
   position: relative;
-  /* box-shadow: inset 15px -185px 261px -44px #000000; */
-  /* box-shadow: inset 15px -185px 261px -44px #000000; */
 }
 
 .hoverLayer {
@@ -30,6 +26,8 @@
   height: 100%;
   width: 100%;
   background: rgb(0 0 0 / 58%);
+  top: 0;
+  left: 0;
 }
 
 .deleteIcon {

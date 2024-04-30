@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
-import CustomInput from "./CustomInput";
 
-function DebouncedInput({ title, handleChange, label }) {
+import { CustomInput } from "./CustomInput";
+
+export function DebouncedInput({ title, handleChange, label }) {
   const [inputVal, setInputVal] = useState("");
   const [debouncedValue] = useDebounce(inputVal, 1000);
 
@@ -25,5 +26,3 @@ function DebouncedInput({ title, handleChange, label }) {
     />
   );
 }
-
-export default DebouncedInput;
