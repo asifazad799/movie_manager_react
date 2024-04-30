@@ -1,27 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
 
 import { useAppStore } from "../store";
-import { useLogout } from "../hooks";
+// import { useLogout } from "../hooks";
+import { Navigate } from "react-router-dom";
 
 export function ProtuctedRoutes() {
   const loggeduser = useAppStore((state) => state?.loggedInUser);
-  const { logOut } = useLogout();
+  // const { logOut } = useLogout();
 
-  useEffect(() => {
-    if (!loggeduser?.token) {
-      logOut();
-    }
-
-    // const expiry = loggeduser.expiry;
-    // const currentDate = new Date();
-    // const expires_at_new = new Date(expiry);
-
-    // if (currentDate > expires_at_new) {
-    //   localStorage.clear();
-    //   navigate("/");
-    // }
-  }, []);
-
-  return <Outlet />;
+  return !loggeduser?.token ? <Navigate to={"/log-in"} /> : <Outlet />;
 }
