@@ -1,0 +1,48 @@
+---
+name: build and deploy on cloudFront
+on:
+  push:
+    branches: [ master ]
+jobs:
+  name: build and deploy
+  runs-on: ubuntu-latest
+    env:
+      BUCKET: ${{ secret.AWS_S3_BUCKET_NAME }}
+      DIST: build
+      REGION: eu-north-1
+      DIST_ID: ${{ secret.AWS_CLOUD_FLARE_DIST_ID }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.REGION }}
+
+    - name: Retrieve env file
+      id: get-prod-env-file
+      run: |
+        env=$(aws ssm get-parameter --name movie-react-app --query 'Parameter.Value' --output text)
+        echo "$env" > .prod.env
+    
+    - name: Install Dependencies
+      run: |
+        node --version
+        npm i --force
+    
+    - name: Build Static Website
+      run: env-cmd -f .prod.env vite build
+
+    - name: Copy files to the production website with the AWS CLI
+      run: |
+        aws s3 sync --delete ${{ env.DIST }} s3://${{ env.BUCKET }}
+
+    - name: Copy files to the production website with the AWS CLI
+      run: |
+        aws cloudfront create-invalidation \
+          --distribution-id ${{ env.DIST_ID }} \
+          --paths "/*"
