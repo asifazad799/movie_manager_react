@@ -9,7 +9,7 @@
     "prod": "env-cmd -f .prod.env vite --host",
     "build:dev": "env-cmd -f .dev.env vite build && npm run copy-sw",
     "copy-sw": "cp service-worker.js dist/service-worker.js",
-    "build:prod": "env-cmd -f .prod.env vite build && && npm run copy-sw",
+    "build:prod": "env-cmd -f .prod.env vite build && npm run copy-sw",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "serve": "vite serve"
