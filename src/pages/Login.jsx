@@ -4,7 +4,7 @@ import "../styles/login.css";
 
 import { LoginForm, DefaultParentComp } from "../components";
 
-export function Login() {
+export default function Login() {
   return (
     <DefaultParentComp>
       <div className="cercle"></div>

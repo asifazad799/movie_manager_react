@@ -5,7 +5,7 @@ import { useForm, useLogin } from "../../hooks";
 
 import { logInValidationSchema } from "../../utils";
 
-import lock from "../../assets/icons/lock.webp";
+import lock from "/icons/lock.webp";
 
 import { CustomInput } from "../common";
 import CircularProgress from "@mui/material/CircularProgress";

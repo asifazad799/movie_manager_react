@@ -1,15 +1,18 @@
 {
   "name": "movie-manager",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "env-cmd -f .dev.env vite --host",
+    "generate-meta-tag": "node ./node_modules/react-cache-buster/dist/generate-meta-tag.js",
     "prod": "env-cmd -f .prod.env vite --host",
-    "build:dev": "env-cmd -f .dev.env vite build",
-    "build:prod": "env-cmd -f .prod.env vite build",
+    "build:dev": "env-cmd -f .dev.env vite build && npm run copy-sw",
+    "copy-sw": "cp service-worker.js dist/service-worker.js",
+    "build:prod": "env-cmd -f .prod.env vite build && && npm run copy-sw",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "vite serve"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -22,6 +25,7 @@
     "formik": "^2.4.5",
     "localstorage-slim": "^2.7.0",
     "react": "^18.2.0",
+    "react-cache-buster": "^0.1.8",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
     "react-toastify": "^10.0.5",
