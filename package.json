@@ -25,7 +25,6 @@
     "formik": "^2.4.5",
     "localstorage-slim": "^2.7.0",
     "react": "^18.2.0",
-    "react-cache-buster": "^0.1.8",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
     "react-toastify": "^10.0.5",

@@ -1,6 +1,5 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-// import CacheBuster from "react-cache-buster";
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,24 +12,12 @@ import {
   UnProtuctedRoutes,
   SignUp,
 } from "./pages";
-// import { version } from "../package.json";
 
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 
 function App() {
   return (
-    // <CacheBuster
-    //   currentVersion={version}
-    //   isEnabled={true} //If false, the library is disabled.
-    //   isVerboseMode={false} //If true, the library writes verbose logs to console.
-    //   loadingComponent={
-    //     <div>
-    //       <h1 style={{ color: "black" }}>Loading...</h1>
-    //     </div>
-    //   } //If not pass, nothing appears at the time of new version check.
-    //   metaFileDirectory={"."} //If public assets are hosted somewhere other than root on your server.
-    // >
     <div className="app">
       <ToastContainer />
       <BrowserRouter>
@@ -61,7 +48,6 @@ function App() {
         </Suspense>
       </BrowserRouter>
     </div>
-    // </CacheBuster>
   );
 }
 
