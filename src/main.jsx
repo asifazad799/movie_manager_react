@@ -15,6 +15,7 @@ if ("serviceWorker" in navigator) {
     const wb = new Workbox("/service-worker.js");
 
     wb.addEventListener("installed", (event) => {
+      console.log("New Version is available:");
       if (event.isUpdate) {
         if (confirm("New content is available; please refresh.")) {
           window.location.reload();
@@ -23,6 +24,7 @@ if ("serviceWorker" in navigator) {
     });
 
     wb.addEventListener("waiting", (event) => {
+      console.log("New Version is available:");
       if (confirm("New version available. Do you want to reload?")) {
         wb.messageSW({ type: "SKIP_WAITING" });
       }
