@@ -96,9 +96,7 @@ registerRoute(
 
     return true;
   },
-  createHandlerBoundToURL(
-    "https://movieapp.asifazad799.online/home" + "/index.html"
-  )
+  createHandlerBoundToURL("https://movieapp.asifazad799.online" + "/index.html")
 );
 
 // An example runtime caching route for requests that aren't handled by the
