@@ -9,7 +9,7 @@
     "prod": "env-cmd -f .prod.env vite --host",
     "copy-sw": "cp service-worker.js dist/service-worker.js",
     "build:dev": "env-cmd -f .dev.env vite build && workbox injectManifest workbox-config.cjs",
-    "build:prod": "env-cmd -f .prod.env vite build && workbox injectManifest workbox-config.js",
+    "build:prod": "env-cmd -f .prod.env vite build && workbox injectManifest workbox-config.cjs",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "serve": "vite serve"
