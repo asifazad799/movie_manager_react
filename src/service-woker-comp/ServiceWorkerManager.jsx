@@ -74,6 +74,7 @@ export const ServiceWorkerManager = () => {
   const [unavailableBrowser, setUnavailableBrowser] = useState(false);
 
   const onSWUpdate = useCallback((registration) => {
+    console.log(registration, "update trigger", registration.waiting);
     const waitingWorker = registration.waiting;
     if (waitingWorker) {
       waitingWorker.postMessage({ type: "SKIP_WAITING" });
