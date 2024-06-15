@@ -21,6 +21,7 @@ if ("serviceWorker" in navigator) {
         registration.update();
         setInterval(() => {
           // Check for updates every 5 minutes
+          console.log("Checking...");
           registration.update();
         }, 2000);
 
