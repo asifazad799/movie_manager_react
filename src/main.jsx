@@ -37,7 +37,10 @@ if ("serviceWorker" in navigator) {
                   // window.location.reload(true);
 
                   window.location.href =
-                    window.location.href.slice(0, newHref.indexOf("?")) +
+                    window.location.href.slice(
+                      0,
+                      window.location.href.indexOf("?")
+                    ) +
                     "?cache-bust=" +
                     new Date().getTime();
                 }
