@@ -39,7 +39,7 @@ if ("serviceWorker" in navigator) {
                   window.location.href =
                     window.location.href.slice(
                       0,
-                      window.location.href.indexOf("?")
+                      window.location.href.indexOf("?") - 1
                     ) +
                     "?cache-bust=" +
                     new Date().getTime();
