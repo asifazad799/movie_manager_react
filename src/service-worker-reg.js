@@ -122,6 +122,7 @@ function checkValidServiceWorker(swUrl, config) {
     .then((response) => {
       // Ensure service worker exists, and that we really are getting a JS file.
       const contentType = response.headers.get("content-type");
+      console.log(contentType, "rec cont type");
       if (
         response.status === 404 ||
         (contentType != null && contentType.indexOf("javascript") === -1)
@@ -133,6 +134,7 @@ function checkValidServiceWorker(swUrl, config) {
           });
         });
       } else {
+        console.log("got the correct sw");
         // Service worker found. Proceed as normal.
         registerValidSW(swUrl, config);
       }
