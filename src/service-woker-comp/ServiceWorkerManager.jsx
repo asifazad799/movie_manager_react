@@ -97,6 +97,7 @@ export const ServiceWorkerManager = () => {
     // if (!unavailableBrowser) {
     serviceWorkerRegistration.register({
       onUpdate: onSWUpdate,
+      onSWUpdate: onSWUpdate,
     });
     // }
   }, [onSWUpdate, unavailableBrowser]);
