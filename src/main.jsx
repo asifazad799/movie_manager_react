@@ -32,10 +32,15 @@ if ("serviceWorker" in navigator) {
               if (navigator.serviceWorker.controller) {
                 console.log("New content is available; please refresh.");
                 if (confirm("New version available. Do you want to reload?")) {
-                  // window.location.reload();
-                  registration.active.postMessage({
-                    type: "CLEAR_CACHE_AND_RELOAD",
-                  });
+                  // window.location.reload(true);
+                  window.location.href =
+                    window.location.href +
+                    "?cache-bust=" +
+                    new Date().getTime();
+
+                  // registration.active.postMessage({
+                  //   type: "CLEAR_CACHE_AND_RELOAD",
+                  // });
                 }
               }
             }
