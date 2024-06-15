@@ -36,8 +36,22 @@ if ("serviceWorker" in navigator) {
                 if (confirm("New version available. Do you want to reload?")) {
                   // window.location.reload(true);
 
-                  window.location.href = window.location.href;
-                  "?cache-bust=" + new Date().getTime();
+                  // window.location.href = window.location.href;
+                  // "?cache-bust=" + new Date().getTime();
+                  // Get the current URL
+                  let newHref = window.location.href;
+
+                  // Check if the URL already has a query string
+                  if (newHref.indexOf("?") !== -1) {
+                    // If there is a query string, append the new parameter using '&'
+                    newHref += "&eraseCache=true";
+                  } else {
+                    // If there is no query string, start one with '?'
+                    newHref += "?eraseCache=true";
+                  }
+
+                  // Redirect to the new URL
+                  window.location = newHref;
                 }
               }
             }
