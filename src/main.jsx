@@ -36,13 +36,8 @@ if ("serviceWorker" in navigator) {
                 if (confirm("New version available. Do you want to reload?")) {
                   // window.location.reload(true);
 
-                  window.location.href =
-                    window.location.href.slice(
-                      0,
-                      window.location.href.indexOf("?")
-                    ) +
-                    "?cache-bust=" +
-                    new Date().getTime();
+                  window.location.href = window.location.href;
+                  "?cache-bust=" + new Date().getTime();
                 }
               }
             }
