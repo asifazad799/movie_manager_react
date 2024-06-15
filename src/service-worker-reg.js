@@ -37,24 +37,24 @@ export function register(config) {
     }
 
     window.addEventListener("load", () => {
-      const swUrl = `https://movieapp.asifazad799.online/service-worker.js`;
+      const swUrl = `/service-worker.js`;
 
-      if (isLocalhost) {
-        // This is running on localhost. Let's check if a service worker still exists or not.
-        checkValidServiceWorker(swUrl, config);
+      //   if (isLocalhost) {
+      //     // This is running on localhost. Let's check if a service worker still exists or not.
+      //     checkValidServiceWorker(swUrl, config);
 
-        // Add some additional logging to localhost, pointing developers to the
-        // service worker/PWA documentation.
-        navigator.serviceWorker.ready.then(() => {
-          console.log(
-            "This web app is being served cache-first by a service " +
-              "worker. To learn more, visit https://cra.link/PWA"
-          );
-        });
-      } else {
-        // Is not localhost. Just register service worker
-        registerValidSW(swUrl, config);
-      }
+      //     // Add some additional logging to localhost, pointing developers to the
+      //     // service worker/PWA documentation.
+      //     navigator.serviceWorker.ready.then(() => {
+      //       console.log(
+      //         "This web app is being served cache-first by a service " +
+      //           "worker. To learn more, visit https://cra.link/PWA"
+      //       );
+      //     });
+      //   } else {
+      // Is not localhost. Just register service worker
+      registerValidSW(swUrl, config);
+      //   }
     });
   }
 }
@@ -63,6 +63,8 @@ function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
+      console.log("Service Worker registered:", registration);
+
       registration.update();
       setInterval(() => {
         // Check for updates every 5 minutes
