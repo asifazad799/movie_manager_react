@@ -33,23 +33,9 @@ if ("serviceWorker" in navigator) {
                 console.log("New content is available; please refresh.");
                 if (confirm("New version available. Do you want to reload?")) {
                   // window.location.reload();
-                  caches
-                    .keys()
-                    .then((cacheNames) => {
-                      return Promise.all(
-                        cacheNames.map((cacheName) => {
-                          return caches.delete(cacheName);
-                        })
-                      );
-                    })
-                    .then(() => {
-                      // Once caches are cleared, reload the page
-                      self.clients.matchAll().then((clients) => {
-                        clients.forEach((client) =>
-                          client.navigate(client.url)
-                        );
-                      });
-                    });
+                  registration.active.postMessage({
+                    type: "CLEAR_CACHE_AND_RELOAD",
+                  });
                 }
               }
             }

@@ -141,3 +141,24 @@ self.addEventListener("message", (event) => {
     self.skipWaiting();
   }
 });
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "CLEAR_CACHE_AND_RELOAD") {
+    // Clear all caches
+    caches
+      .keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => {
+            return caches.delete(cacheName);
+          })
+        );
+      })
+      .then(() => {
+        // Once caches are cleared, reload the page
+        self.clients.matchAll({ type: "window" }).then((clients) => {
+          clients.forEach((client) => client.navigate(client.url));
+        });
+      });
+  }
+});
