@@ -9,33 +9,65 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <App />
   </React.StrictMode>
 );
-// Register the service worker with Workbox
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    const wb = new Workbox("/service-worker.js");
-
-    wb.addEventListener("installed", (event) => {
-      console.log("New Version is available:");
-      if (event.isUpdate) {
-        if (confirm("New content is available; please refresh.")) {
-          window.location.reload();
-        }
-      }
-    });
-
-    wb.addEventListener("waiting", (event) => {
-      console.log("New Version is available:");
-      if (confirm("New version available. Do you want to reload?")) {
-        wb.messageSW({ type: "SKIP_WAITING" });
-      }
-    });
-
-    wb.register()
+    navigator.serviceWorker
+      .register("/service-worker.js")
       .then((registration) => {
-        console.log("Service Worker registered with Workbox:", registration);
+        console.log("Service Worker registered:", registration);
+
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === "installed") {
+              if (navigator.serviceWorker.controller) {
+                console.log("New content is available; please refresh.");
+                if (confirm("New version available. Do you want to reload?")) {
+                  window.location.reload();
+                }
+              }
+            }
+          };
+        };
       })
       .catch((error) => {
-        console.log("Service Worker registration failed with Workbox:", error);
+        console.log("Service Worker registration failed:", error);
       });
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      window.location.reload();
+    });
   });
 }
+
+// Register the service worker with Workbox
+// if ("serviceWorker" in navigator) {
+//   window.addEventListener("load", () => {
+//     const wb = new Workbox("/service-worker.js");
+
+//     wb.addEventListener("installed", (event) => {
+//       console.log("New Version is available:");
+//       if (event.isUpdate) {
+//         if (confirm("New content is available; please refresh.")) {
+//           window.location.reload();
+//         }
+//       }
+//     });
+
+//     wb.addEventListener("waiting", (event) => {
+//       console.log("New Version is available:");
+//       if (confirm("New version available. Do you want to reload?")) {
+//         wb.messageSW({ type: "SKIP_WAITING" });
+//       }
+//     });
+
+//     wb.register()
+//       .then((registration) => {
+//         console.log("Service Worker registered with Workbox:", registration);
+//       })
+//       .catch((error) => {
+//         console.log("Service Worker registration failed with Workbox:", error);
+//       });
+//   });
+// }
