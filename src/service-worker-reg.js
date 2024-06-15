@@ -26,7 +26,7 @@ export function register(config) {
   if ("serviceWorker" in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(
-      "https://movieapp.asifazad799.online/home",
+      "https://movieapp.asifazad799.online",
       window.location.href
     );
     if (publicUrl.origin !== window.location.origin) {
