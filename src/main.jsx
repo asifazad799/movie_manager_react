@@ -34,15 +34,15 @@ if ("serviceWorker" in navigator) {
               if (navigator.serviceWorker.controller) {
                 console.log("New content is available; please refresh.");
                 if (confirm("New version available. Do you want to reload?")) {
-                  window.location.reload(true);
+                  // window.location.reload(true);
 
-                  // window.location.href =
-                  //   window.location.href.slice(
-                  //     0,
-                  //     window.location.href.indexOf("?") - 1
-                  //   ) +
-                  //   "?cache-bust=" +
-                  //   new Date().getTime();
+                  window.location.href =
+                    window.location.href.slice(
+                      0,
+                      window.location.href.indexOf("?")
+                    ) +
+                    "?cache-bust=" +
+                    new Date().getTime();
                 }
               }
             }
