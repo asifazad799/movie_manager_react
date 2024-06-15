@@ -35,11 +35,14 @@ if ("serviceWorker" in navigator) {
                 console.log("New content is available; please refresh.");
                 if (confirm("New version available. Do you want to reload?")) {
                   // window.location.reload(true);
-                  // const url = new URL(window.location);
-                  // url.searchParams.set("cache-bust", new Date().getTime());
-                  // window.location.href = url.href;
-                  window.location.search =
-                    "?cache-bust=" + new Date().getTime();
+                  let newHref = String(window.location.href);
+
+                  if (newHref.includes("?")) {
+                    newHref = newHref.slice(0, newHref.indexOf("?"));
+                  }
+
+                  window.location.href =
+                    newHref + "?cache-bust=" + new Date().getTime();
                 }
               }
             }
