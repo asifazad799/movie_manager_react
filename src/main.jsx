@@ -11,36 +11,42 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>
 );
 
-// if ("serviceWorker" in navigator) {
-// window.addEventListener("load", () => {
-//   navigator.serviceWorker
-//     .register("/service-worker.js")
-//     .then((registration) => {
-//       console.log("Service Worker registered:", registration);
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then((registration) => {
+        console.log("Service Worker registered:", registration);
 
-//       registration.onupdatefound = () => {
-//         const installingWorker = registration.installing;
-//         installingWorker.onstatechange = () => {
-//           if (installingWorker.state === "installed") {
-//             if (navigator.serviceWorker.controller) {
-//               console.log("New content is available; please refresh.");
-//               if (confirm("New version available. Do you want to reload?")) {
-//                 window.location.reload();
-//               }
-//             }
-//           }
-//         };
-//       };
-//     })
-//     .catch((error) => {
-//       console.log("Service Worker registration failed:", error);
-//     });
+        registration.update();
+        setInterval(() => {
+          // Check for updates every 5 minutes
+          registration.update();
+        }, 2000);
 
-//   navigator.serviceWorker.addEventListener("controllerchange", () => {
-//     window.location.reload();
-//   });
-// });
-// }
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === "installed") {
+              if (navigator.serviceWorker.controller) {
+                console.log("New content is available; please refresh.");
+                if (confirm("New version available. Do you want to reload?")) {
+                  window.location.reload();
+                }
+              }
+            }
+          };
+        };
+      })
+      .catch((error) => {
+        console.log("Service Worker registration failed:", error);
+      });
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      window.location.reload();
+    });
+  });
+}
 
 // Register the service worker with Workbox
 // if ("serviceWorker" in navigator) {

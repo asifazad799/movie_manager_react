@@ -12,7 +12,7 @@ import {
   UnProtuctedRoutes,
   SignUp,
 } from "./pages";
-import ServiceWorkerManager from "./service-woker-comp/ServiceWorkerManager";
+// import ServiceWorkerManager from "./service-woker-comp/ServiceWorkerManager";
 
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
@@ -20,7 +20,7 @@ const Login = lazy(() => import("./pages/Login"));
 function App() {
   return (
     <div className="app">
-      <ServiceWorkerManager />
+      {/* <ServiceWorkerManager /> */}
       <ToastContainer />
       <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
