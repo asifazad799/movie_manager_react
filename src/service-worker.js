@@ -8,13 +8,13 @@ import { StaleWhileRevalidate } from "workbox-strategies";
 precacheAndRoute(self.__WB_MANIFEST);
 
 // Example runtime caching for API calls
-// registerRoute(
-//   ({ url }) =>
-//     url.origin === "https://movie-manage-node-app.asifazad799.online/",
-//   new StaleWhileRevalidate({
-//     cacheName: "api-cache",
-//   })
-// );
+registerRoute(
+  ({ url }) =>
+    url.origin === "https://movie-manage-node-app.asifazad799.online/",
+  new StaleWhileRevalidate({
+    cacheName: "api-cache",
+  })
+);
 
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
