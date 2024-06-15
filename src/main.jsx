@@ -11,6 +11,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>
 );
 
+console.log(window.location);
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -33,10 +35,9 @@ if ("serviceWorker" in navigator) {
                 console.log("New content is available; please refresh.");
                 if (confirm("New version available. Do you want to reload?")) {
                   // window.location.reload(true);
-                  window.location.href =
-                    window.location.href +
-                    "?cache-bust=" +
-                    new Date().getTime();
+                  const url = new URL(window.location);
+                  url.searchParams.set("cache-bust", new Date().getTime());
+                  window.location.href = url.href;
                 }
               }
             }
