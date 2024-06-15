@@ -1,20 +1,31 @@
 // src/service-worker.js
 
-import { precacheAndRoute } from "workbox-precaching";
-import { registerRoute } from "workbox-routing";
-import { StaleWhileRevalidate } from "workbox-strategies";
+self.addEventListener("install", (event) => {
+  self.skipWaiting();
+});
 
-// Precache all files in the manifest
-precacheAndRoute(self.__WB_MANIFEST);
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== "your-app-cache-v1") {
+            return caches.delete(cache);
+          }
+        })
+      );
+    })
+  );
+  self.clients.claim();
+});
 
-// Example runtime caching for API calls
-registerRoute(
-  ({ url }) =>
-    url.origin === "https://movie-manage-node-app.asifazad799.online/",
-  new StaleWhileRevalidate({
-    cacheName: "api-cache",
-  })
-);
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
+});
 
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
