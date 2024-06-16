@@ -66,10 +66,12 @@ registerRoute(
 );
 
 registerRoute(
-  ({ url }) =>
-    url.pathname.startsWith(
+  ({ url }) => {
+    console.log(url.pathname, "api");
+    return url.pathname.startsWith(
       "https://movie-manage-node-app.asifazad799.online/api/"
-    ),
+    );
+  },
   new NetworkFirst({
     cacheName: "api-cache",
     plugins: [
