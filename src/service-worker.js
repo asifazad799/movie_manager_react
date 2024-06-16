@@ -159,9 +159,9 @@ self.addEventListener("message", (event) => {
       })
       .then(() => {
         self.clients.matchAll({ type: "window" }).then((clients) => {
-          clients.forEach((client) =>
-            client.postMessage({ type: "CLEAR_CACHE_AND_RELOAD" })
-          );
+          clients.forEach((client) => {
+            client.navigate(client.url + "?cache-bust=" + new Date().getTime());
+          });
         });
       })
       .catch((error) => {
