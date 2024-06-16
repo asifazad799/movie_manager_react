@@ -31,6 +31,7 @@ if ("serviceWorker" in navigator) {
             if (installingWorker.state === "installed") {
               if (navigator.serviceWorker.controller) {
                 console.log("New content is available; please refresh.");
+                installingWorker.postMessage({ type: "SKIP_WAITING" });
 
                 if (registration.active) {
                   registration.active.postMessage({
@@ -52,9 +53,6 @@ if ("serviceWorker" in navigator) {
       if (event.data && event.data.type === "RELOAD_PAGE") {
         if (confirm("New version available. Do you want to reload?")) {
           window.location.href = event.data.url;
-          registration.active.postMessage({
-            type: "SKIP_WAITING",
-          });
         }
       }
     });
