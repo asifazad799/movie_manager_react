@@ -160,17 +160,7 @@ self.addEventListener("message", (event) => {
       .then(() => {
         self.clients.matchAll({ type: "window" }).then((clients) => {
           clients.forEach((client) => {
-            let url = new URL(client.url);
-
-            // Remove all existing query parameters
-            url.search = "";
-
-            // Add new query parameters
-            url.searchParams.set("cache-bust", `${new Date().getTime()}`);
-
-            let newUrl = url.toString();
-
-            client.navigate(newUrl);
+            client.navigate(client.url + "?cache-bust=" + new Date().getTime());
           });
         });
         // self.clients.matchAll({ type: "window" }).then((clients) => {
