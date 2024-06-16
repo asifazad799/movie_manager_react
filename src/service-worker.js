@@ -165,7 +165,7 @@ self.addEventListener("message", (event) => {
             // Add new query parameters
             url.searchParams.set("cache-bust", `${new Date().getTime()}`);
 
-            client.postMessage({ type: "RELOAD_PAGE", url });
+            client.postMessage({ type: "RELOAD_PAGE", url: url });
           });
         });
         // self.clients.matchAll({ type: "window" }).then((clients) => {
