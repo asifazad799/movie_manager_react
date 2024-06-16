@@ -160,6 +160,7 @@ self.addEventListener("message", (event) => {
       .then(() => {
         self.clients.matchAll({ type: "window" }).then((clients) => {
           clients.forEach((client) => {
+            console.log(client);
             client.navigate(client.url + "?cache-bust=" + new Date().getTime());
           });
         });
