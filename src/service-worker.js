@@ -160,11 +160,12 @@ self.addEventListener("message", (event) => {
       .then(() => {
         self.clients.matchAll({ type: "window" }).then((clients) => {
           clients.forEach((client) => {
-            console.log(client);
+            let url = new URL(client.url);
 
-            client.url.searchParams.delete("cache-bust");
+            // Add new query parameters
+            url.searchParams.set("cache-bust", `${new Date().getTime()}`);
 
-            client.navigate(client.url + "?cache-bust=" + new Date().getTime());
+            client.postMessage({ type: "RELOAD_PAGE", url });
           });
         });
         // self.clients.matchAll({ type: "window" }).then((clients) => {

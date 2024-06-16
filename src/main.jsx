@@ -55,9 +55,16 @@ if ("serviceWorker" in navigator) {
         console.log("Service Worker registration failed:", error);
       });
 
+    navigator.serviceWorker.addEventListener("message", (event) => {
+      if (event.data && event.data.type === "RELOAD_PAGE") {
+        if (confirm("New version available. Do you want to reload?")) {
+          window.location.href = event.data.url;
+        }
+      }
+    });
+
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       window.location.reload();
-      console.log("controllerchange");
     });
   });
 }
