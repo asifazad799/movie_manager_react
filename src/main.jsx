@@ -25,10 +25,10 @@ if ("serviceWorker" in navigator) {
           registration.update();
         }, 2000);
 
-        const waitingWorker = registration.waiting;
-        if (waitingWorker) {
-          waitingWorker.postMessage({ type: "SKIP_WAITING" });
-        }
+        // const waitingWorker = registration.waiting;
+        // if (waitingWorker) {
+        //   waitingWorker.postMessage({ type: "SKIP_WAITING" });
+        // }
 
         registration.onupdatefound = () => {
           const installingWorker = registration.installing;
@@ -38,13 +38,22 @@ if ("serviceWorker" in navigator) {
                 console.log("New content is available; please refresh.");
                 // installingWorker.postMessage({ type: "SKIP_WAITING" });
 
-                if (registration.active) {
-                  registration.active.postMessage({
-                    type: "CLEAR_CACHE_AND_RELOAD",
-                  });
-                } else {
-                  console.error("No active Service Worker found.");
+                const waitingWorker = registration.waiting;
+                if (waitingWorker) {
+                  waitingWorker.postMessage({ type: "SKIP_WAITING" });
                 }
+
+                if (confirm("New version available. Do you want to reload?")) {
+                  window.location.reload();
+                }
+
+                // if (registration.active) {
+                //   // registration.active.postMessage({
+                //   //   type: "CLEAR_CACHE_AND_RELOAD",
+                //   // });
+                // } else {
+                //   console.error("No active Service Worker found.");
+                // }
               }
             }
           };
