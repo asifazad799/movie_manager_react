@@ -11,8 +11,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>
 );
 
-console.log(window.location);
-
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -39,19 +37,14 @@ if ("serviceWorker" in navigator) {
                   // window.location.href = window.location.href;
                   // "?cache-bust=" + new Date().getTime();
                   // Get the current URL
-                  let newHref = window.location.href;
 
-                  // Check if the URL already has a query string
-                  if (newHref.indexOf("?") !== -1) {
-                    // If there is a query string, append the new parameter using '&'
-                    newHref += "&eraseCache=true";
+                  if (registration.active) {
+                    registration.active.postMessage({
+                      type: "CLEAR_CACHE_AND_RELOAD",
+                    });
                   } else {
-                    // If there is no query string, start one with '?'
-                    newHref += "?eraseCache=true";
+                    console.error("No active Service Worker found.");
                   }
-
-                  // Redirect to the new URL
-                  window.location = newHref;
                 }
               }
             }
