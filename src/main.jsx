@@ -32,12 +32,6 @@ if ("serviceWorker" in navigator) {
               if (navigator.serviceWorker.controller) {
                 console.log("New content is available; please refresh.");
 
-                // window.location.reload(true);
-
-                // window.location.href = window.location.href;
-                // "?cache-bust=" + new Date().getTime();
-                // Get the current URL
-
                 if (registration.active) {
                   registration.active.postMessage({
                     type: "CLEAR_CACHE_AND_RELOAD",
