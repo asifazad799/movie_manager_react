@@ -158,16 +158,26 @@ self.addEventListener("message", (event) => {
         );
       })
       .then(() => {
-        // self.clients.matchAll({ type: "window" }).then((clients) => {
-        //   clients.forEach((client) => {
-        //     client.navigate(client.url + "?cache-bust=" + new Date().getTime());
-        //   });
-        // });
         self.clients.matchAll({ type: "window" }).then((clients) => {
           clients.forEach((client) => {
-            client.postMessage({ type: "RELOAD_PAGE" });
+            let url = new URL(client.url);
+
+            // Remove all existing query parameters
+            url.search = "";
+
+            // Add new query parameters
+            url.searchParams.set("cache-bust", `${new Date().getTime()}`);
+
+            let newUrl = url.toString();
+
+            client.navigate(newUrl);
           });
         });
+        // self.clients.matchAll({ type: "window" }).then((clients) => {
+        //   clients.forEach((client) => {
+        //     client.postMessage({ type: "RELOAD_PAGE" });
+        //   });
+        // });
       })
       .catch((error) => {
         console.error("Error clearing caches and reloading:", error);
