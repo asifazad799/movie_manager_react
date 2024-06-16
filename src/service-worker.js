@@ -101,6 +101,7 @@ self.addEventListener("message", (event) => {
   }
 });
 
+// no need , need to be removed
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "CLEAR_CACHE_AND_RELOAD") {
     caches
