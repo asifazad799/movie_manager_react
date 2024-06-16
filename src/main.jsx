@@ -31,20 +31,19 @@ if ("serviceWorker" in navigator) {
             if (installingWorker.state === "installed") {
               if (navigator.serviceWorker.controller) {
                 console.log("New content is available; please refresh.");
-                if (confirm("New version available. Do you want to reload?")) {
-                  // window.location.reload(true);
 
-                  // window.location.href = window.location.href;
-                  // "?cache-bust=" + new Date().getTime();
-                  // Get the current URL
+                // window.location.reload(true);
 
-                  if (registration.active) {
-                    registration.active.postMessage({
-                      type: "CLEAR_CACHE_AND_RELOAD",
-                    });
-                  } else {
-                    console.error("No active Service Worker found.");
-                  }
+                // window.location.href = window.location.href;
+                // "?cache-bust=" + new Date().getTime();
+                // Get the current URL
+
+                if (registration.active) {
+                  registration.active.postMessage({
+                    type: "CLEAR_CACHE_AND_RELOAD",
+                  });
+                } else {
+                  console.error("No active Service Worker found.");
                 }
               }
             }
