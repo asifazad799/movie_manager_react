@@ -52,6 +52,9 @@ if ("serviceWorker" in navigator) {
       if (event.data && event.data.type === "RELOAD_PAGE") {
         if (confirm("New version available. Do you want to reload?")) {
           window.location.href = event.data.url;
+          registration.active.postMessage({
+            type: "SKIP_WAITING",
+          });
         }
       }
     });
