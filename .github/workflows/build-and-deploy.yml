@@ -2,7 +2,7 @@
 name: build and deploy on cloudFront
 on:
   push:
-    branches: [worker-cache]
+    branches: [master]
 
 env:
   BUCKET: movieapp.asifazad799.online
