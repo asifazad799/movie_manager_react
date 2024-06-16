@@ -11,7 +11,11 @@ import { clientsClaim } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
-import { StaleWhileRevalidate, NetworkFirst } from "workbox-strategies";
+import {
+  StaleWhileRevalidate,
+  NetworkFirst,
+  CacheFirst,
+} from "workbox-strategies";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 
 clientsClaim();
@@ -66,6 +70,13 @@ registerRoute(
 );
 
 registerRoute(
+  ({ request }) => request.destination === "document",
+  new CacheFirst({
+    cacheName: "html-cache",
+  })
+);
+
+registerRoute(
   ({ url }) => url.pathname.startsWith("/api/"),
   new NetworkFirst({
     cacheName: "api-cache",
@@ -87,37 +98,6 @@ self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
     self.skipWaiting();
   }
-});
-
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open("static-cache").then((cache) => {
-      return cache.addAll([
-        "/",
-        "/index.html",
-        "/assets/*",
-        // Add other UI files here
-      ]);
-    })
-  );
-});
-
-self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return (
-        response ||
-        fetch(event.request).then((response) => {
-          // Cache the response for future requests
-          caches.open("api-cache").then((cache) => {
-            cache.put(event.request, response.clone());
-          });
-
-          return response;
-        })
-      );
-    })
-  );
 });
 
 self.addEventListener("message", (event) => {
