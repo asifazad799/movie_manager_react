@@ -33,7 +33,7 @@ export function LoginForm({ customHandleSubmit }) {
 
   return (
     <div className="login-form d-flex">
-      <p className="defaultFont">{"Login asif azd test 2"}</p>
+      <p className="defaultFont">{"Login asif azd test 3"}</p>
       <form className="form" onSubmit={handleSubmit}>
         <img src={lock} className="lockIcon" />
 
