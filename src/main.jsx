@@ -38,9 +38,11 @@ if ("serviceWorker" in navigator) {
                 console.log("New content is available; please refresh.");
                 // installingWorker.postMessage({ type: "SKIP_WAITING" });
 
-                if (confirm("New version available. Do you want to reload?")) {
-                  const waitingWorker = registration.waiting;
-                  if (waitingWorker) {
+                const waitingWorker = registration.waiting;
+                if (waitingWorker) {
+                  if (
+                    confirm("New version available. Do you want to reload?")
+                  ) {
                     waitingWorker.postMessage({ type: "SKIP_WAITING" });
                   }
                 }
