@@ -55,6 +55,12 @@ if ("serviceWorker" in navigator) {
         console.log("Service Worker registration failed:", error);
       });
 
+    navigator.serviceWorker.addEventListener("message", (event) => {
+      if (event.data && event.data.type === "RELOAD_PAGE") {
+        window.location.reload();
+      }
+    });
+
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       window.location.reload();
     });
