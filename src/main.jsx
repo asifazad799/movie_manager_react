@@ -40,11 +40,13 @@ if ("serviceWorker" in navigator) {
 
                 const waitingWorker = registration.waiting;
                 if (waitingWorker) {
-                  waitingWorker.postMessage({ type: "SKIP_WAITING" });
-                }
+                  if (
+                    confirm("New version available. Do you want to reload?")
+                  ) {
+                    waitingWorker.postMessage({ type: "SKIP_WAITING" });
+                  }
 
-                if (confirm("New version available. Do you want to reload?")) {
-                  window.location.reload();
+                  // window.location.reload();
                 }
 
                 // if (registration.active) {

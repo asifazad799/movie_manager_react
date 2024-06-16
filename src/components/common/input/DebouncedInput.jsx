@@ -20,7 +20,7 @@ export function DebouncedInput({ title, handleChange, label }) {
       fullWidth
       variant="outlined"
       id="search"
-      label={label || "Search Asif"}
+      label={label || "Search Asif Azad"}
       title={title || "Search New Movie"}
       onChange={handleInputChange}
     />
