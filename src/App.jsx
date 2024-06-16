@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import "./App.css";
@@ -6,41 +6,48 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { ToastContainer } from "react-toastify";
 import {
-  Login,
-  Home,
+  // Login,
+  // Home,
   ProtuctedRoutes,
   UnProtuctedRoutes,
   SignUp,
 } from "./pages";
+// import ServiceWorkerManager from "./service-woker-comp/ServiceWorkerManager";
+
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/Login"));
 
 function App() {
   return (
     <div className="app">
+      {/* <ServiceWorkerManager /> */}
       <ToastContainer />
       <BrowserRouter>
-        <Routes>
-          <Route element={<UnProtuctedRoutes />}>
-            <Route path="/" element={<Login />} exact />
-            <Route path="/log-in" element={<Login />} exact />
-            <Route path="/sign-up" element={<SignUp />} exact />
-          </Route>
-          <Route element={<ProtuctedRoutes />}>
-            <Route path="/home" element={<Home />} exact />
-          </Route>
-          <Route
-            path="*"
-            element={
-              <div>
-                <h1 style={{ color: "red" }}>No Page Found</h1>
-                <button>
-                  <Link to={-1}>
-                    <h2>Go to back</h2>
-                  </Link>
-                </button>
-              </div>
-            }
-          />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route element={<UnProtuctedRoutes />}>
+              <Route path="/" element={<Login />} exact />
+              <Route path="/log-in" element={<Login />} exact />
+              <Route path="/sign-up" element={<SignUp />} exact />
+            </Route>
+            <Route element={<ProtuctedRoutes />}>
+              <Route path="/home" element={<Home />} exact />
+            </Route>
+            <Route
+              path="*"
+              element={
+                <div>
+                  <h1 style={{ color: "red" }}>No Page Found</h1>
+                  <button>
+                    <Link to={-1}>
+                      <h2>Go to back</h2>
+                    </Link>
+                  </button>
+                </div>
+              }
+            />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </div>
   );

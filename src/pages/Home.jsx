@@ -14,7 +14,7 @@ import {
   DebouncedInput,
 } from "../components";
 
-export function Home() {
+export default function Home() {
   const [newMovie, setNewMoview] = useState(false);
   const [search, setSearch] = useState("");
 

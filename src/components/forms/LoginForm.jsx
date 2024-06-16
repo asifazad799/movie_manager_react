@@ -5,7 +5,7 @@ import { useForm, useLogin } from "../../hooks";
 
 import { logInValidationSchema } from "../../utils";
 
-import lock from "../../assets/icons/lock.webp";
+import lock from "/icons/lock.webp";
 
 import { CustomInput } from "../common";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -33,7 +33,7 @@ export function LoginForm({ customHandleSubmit }) {
 
   return (
     <div className="login-form d-flex">
-      <p className="defaultFont">{"Login Test"}</p>
+      <p className="defaultFont">{"Login"}</p>
       <form className="form" onSubmit={handleSubmit}>
         <img src={lock} className="lockIcon" />
 
