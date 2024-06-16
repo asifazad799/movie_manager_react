@@ -158,9 +158,14 @@ self.addEventListener("message", (event) => {
         );
       })
       .then(() => {
+        // self.clients.matchAll({ type: "window" }).then((clients) => {
+        //   clients.forEach((client) => {
+        //     client.navigate(client.url + "?cache-bust=" + new Date().getTime());
+        //   });
+        // });
         self.clients.matchAll({ type: "window" }).then((clients) => {
           clients.forEach((client) => {
-            client.navigate(client.url + "?cache-bust=" + new Date().getTime());
+            client.navigate(client.url);
           });
         });
       })
