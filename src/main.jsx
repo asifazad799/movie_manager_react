@@ -25,13 +25,18 @@ if ("serviceWorker" in navigator) {
           registration.update();
         }, 2000);
 
+        const waitingWorker = registration.waiting;
+        if (waitingWorker) {
+          waitingWorker.postMessage({ type: "SKIP_WAITING" });
+        }
+
         registration.onupdatefound = () => {
           const installingWorker = registration.installing;
           installingWorker.onstatechange = () => {
             if (installingWorker.state === "installed") {
               if (navigator.serviceWorker.controller) {
                 console.log("New content is available; please refresh.");
-                installingWorker.postMessage({ type: "SKIP_WAITING" });
+                // installingWorker.postMessage({ type: "SKIP_WAITING" });
 
                 if (registration.active) {
                   registration.active.postMessage({
